@@ -1,9 +1,22 @@
 import time
 from gpiozero import Motor
 
-# Refer to https://docs.viam.com/try-viam/rover-resources/rover-tutorial/ for pin layout
-MOTOR1_PINS = (, )
-MOTOR2_PINS = (, )
+# Refer to L298 Motor Driver Documentation: https://www.electroduino.com/introduction-to-l298n-motor-driver-how-its-work/
+
+# Pins for Rotating Direction
+# Refer to https://docs.viam.com/try-viam/rover-resources/rover-tutorial/ to determine Raspberry Pi Pin Mapping! 
+INPUT_PIN_1_MOTOR_A = 11
+INPUT_PIN_2_MOTOR_A = 13
+
+INPUT_PIN_3_MOTOR_B = 16
+INPUT_PIN_4_MOTOR_B = 18
+
+# Pins for Speed Control
+MOTOR_A_SPEED = 15
+MOTOR_B_SPEED = 22
+
+MOTOR1_PINS = (INPUT_PIN_1_MOTOR_A, INPUT_PIN_2_MOTOR_A)
+MOTOR2_PINS = (INPUT_PIN_3_MOTOR_B, INPUT_PIN_4_MOTOR_B)
 
 # Refer to this document https://gpiozero.readthedocs.io/en/stable/api_output.html?gpiozero.Motor
 motor1 = Motor(forward=MOTOR1_PINS[0], backward=MOTOR1_PINS[1])
