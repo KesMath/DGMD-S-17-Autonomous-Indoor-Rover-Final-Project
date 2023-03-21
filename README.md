@@ -4,14 +4,13 @@
 Kesler Mathieu, Hung Tran, Ameera Zamani Iftekhar, Maggie Lau
 
 ## Type of Project
-Engineering
+Engineering - Graduate Level
 
 ## Detailed Reference
 [Proposal Doc](https://docs.google.com/document/d/1DPl8a1aFSLdDcSO5HPQ68z0GHqil6a57udiRcfCY16c/edit)
 
 ## Summary
 The goal at hand is to create a rover that can be deployed in an unknown indoor environment, autonomously navigate while capturing video feed, and subsequently return to its starting position. The central technique known as SLAM will allow the rover to concurrently map and locate itself in a newfound floorspace. This will subsequently be paired with path planning algorithms so the vehicle can efficiently navigate such space while reducing collisions, henceforth achieving a level of autonomy sufficient enough for indoor reconnaissance. 
-Level: Graduate
 
 ## Introduction
 In certain hostile environments, first responders have to navigate through unknown zones that can lead to their demise if the area isn’t canvassed beforehand. To provide some context, first responders scenarios can range from police officers trying to deescalate hostage situations to firefighters performing disaster relief efforts after the onset of a hurricane and even military personnel commandeering battlefield strongholds from enemy possession. According to the National Institute of Science and Technology, over 83,000 firefighter related injuries (which totaled to $11.8B in 2005) are due to the lack of real-time analytics that can give first responders critical insight into a building’s deteriorating infrastructure. A viable solution is for first responders to deploy a lightweight, rugged chassis rover that has a relatively small form factor and is certainly cost effective, from a sensor standpoint, to perform reconnaissance and return back to its starting point for retrieval/collection. Autonomous navigation will be subsequently paired with live streaming video to a remote server so that operators can analyze and give further command to ground-level constituents.
