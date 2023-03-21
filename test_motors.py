@@ -28,27 +28,36 @@ def speed_check(speed) -> bool:
 
 def move_rover_forward(speed) -> None:
     if speed_check:
+        print("motor1 moving fwd...")
         motor1.forward(speed)
+        print("motor2 moving fwd...")
         motor2.forward(speed)
 
 def move_rover_backward(speed) -> None:
     if speed_check:
+        print("motor1 moving backward...")
         motor1.backward(speed)
+        print("motor2 moving backward...")
         motor2.backward(speed)
-
 
 # For testing purposes only! 
 # At production level, we can leverage "from gpiozero import Robot" to control 2 motors simultaneously!!
 def main():
     # half speed forward, pause, then half speed backwards
+    print("moving fwd...")
     move_rover_forward(0.5)
+    print("sleeping for 5 secs ...")
     time.sleep(5)
+    print("moving backwards...")
     move_rover_backward(0.5)
+    print("stopping motors...")
+    motor1.stop()
+    motor2.stop()
 
     # full speed forward, pause, then full speed backwards
-    move_rover_forward(1)
-    time.sleep(5)
-    move_rover_backward(1)
+    #move_rover_forward(1)
+    #time.sleep(5)
+    #move_rover_backward(1)
 
 if __name__ == '__main__':
     main()
