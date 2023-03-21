@@ -20,8 +20,8 @@ def move_rover_forward(speed) -> None:
 
 def move_rover_backward(speed) -> None:
     if speed_check:
-        motor1.forward(speed)
-        motor2.forward(speed)
+        motor1.backward(speed)
+        motor2.backward(speed)
 
 
 # For testing purposes only! 
