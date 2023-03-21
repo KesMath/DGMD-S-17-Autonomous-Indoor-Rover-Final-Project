@@ -1,5 +1,4 @@
-## Project Title
-:robot:Developing an Autonomous Reconnaissance Robot Used to Navigate Indoor Spaces Using LiDAR based SLAM and Subsequently Stream and Persist Live Video Stream To the Cloud:robot:
+## :robot:Developing an Autonomous Reconnaissance Robot Used to Navigate Indoor Spaces Using LiDAR based SLAM and Subsequently Stream and Persist Live Video Stream To the Cloud:robot:
 
 ## Group Members
 Kesler Mathieu, Hung Tran, Ameera Zamani Iftekhar, Maggie Lau
