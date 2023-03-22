@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 
 # Refer to L298 Motor Driver Documentation: https://www.electroduino.com/introduction-to-l298n-motor-driver-how-its-work/
 
-# Pins for Rotating Direction
+# Pins for Direction Control
 # Refer to https://docs.viam.com/try-viam/rover-resources/rover-tutorial/ to determine Raspberry Pi Pin Mapping! 
 INPUT_PIN_1_MOTOR_A = 11
 INPUT_PIN_2_MOTOR_A = 13
@@ -13,8 +13,8 @@ INPUT_PIN_3_MOTOR_B = 16
 INPUT_PIN_4_MOTOR_B = 18
 
 # Pins for Speed Control
-MOTOR_A_SPEED = 15
-MOTOR_B_SPEED = 22
+MOTOR_A_SPEED_ENABLE = 15
+MOTOR_B_SPEED_ENABLE = 22
 
 # Uses pin numbers not GPIO numbers. Refer to Wiring diagram in above url which illustrates pin numbering being used
 def setup() -> None:
@@ -25,8 +25,10 @@ def setup() -> None:
 
     GPIO.setup(INPUT_PIN_3_MOTOR_B, GPIO.OUT)
     GPIO.setup(INPUT_PIN_4_MOTOR_B, GPIO.OUT)
-    GPIO.setup(MOTOR_A_SPEED, GPIO.OUT)
-    GPIO.setup(MOTOR_B_SPEED, GPIO.OUT)
+    GPIO.setup(MOTOR_A_SPEED_ENABLE, GPIO.OUT)
+    GPIO.setup(MOTOR_B_SPEED_ENABLE, GPIO.OUT)
+    p = GPIO.PWM(MOTOR_A_SPEED_ENABLE, 100)
+    p.start(50)
 
 # Refer to table here for HIGH/LOW combinations <-> movement: https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/
 def motor_off() -> None:
@@ -42,16 +44,15 @@ def move_rover_forward() -> None:
     GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.HIGH)
     GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.LOW)
 
-def full_speed() -> None:
-    GPIO.output(MOTOR_A_SPEED, GPIO.HIGH)
-    GPIO.output(MOTOR_B_SPEED, GPIO.HIGH)
 
 def main():
     print("setting up board...")
-    setup()
-    print("moving rover forward...")
-    full_speed()
-    print("motor off - powering down...")
+    while True:
+        move_rover_forward()
+        time.sleep(10)
+
+    p.ChangeDutyCycle(0)
+    print("turning off motors ...")
     motor_off()
     print("gpio cleanup...")
     GPIO.cleanup()
