@@ -31,8 +31,8 @@ GPIO.setup(MOTOR_B_SPEED_ENABLE, GPIO.OUT)
 # Reference on Pulse Width Modulation (PWM): https://raspi.tv/2013/rpi-gpio-0-5-2a-now-has-software-pwm-how-to-use-it
 p1 = GPIO.PWM(MOTOR_A_SPEED_ENABLE, 100)
 p2 = GPIO.PWM(MOTOR_B_SPEED_ENABLE, 100)
-p1.start(50) # 50% duty cycle or 50% power
-p2.start(50)
+p1.start(50) # 50% duty cycle or 50% power for motor 1
+p2.start(50) # 50% duty cycle or 50% power for motor 2
 
 # Refer to table here for HIGH/LOW combinations <-> movement: https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/
 def move_rover_forward() -> None:
@@ -50,6 +50,7 @@ def move_rover_backward() -> None:
     GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.HIGH)
 
 # Good video tutorial: https://www.youtube.com/watch?v=Qp4wNdyC2Z0
+# Rover goes forward for 10 sec then drives back for 10 sec
 def main():
     try:
         while True:
