@@ -13,8 +13,8 @@ INPUT_PIN_3_MOTOR_B = 16
 INPUT_PIN_4_MOTOR_B = 18
 
 # Pins for Speed Control
-#MOTOR_A_SPEED = 15
-#MOTOR_B_SPEED = 22
+MOTOR_A_SPEED = 15
+MOTOR_B_SPEED = 22
 
 # Uses pin numbers not GPIO numbers. Refer to Wiring diagram in above url which illustrates pin numbering being used
 def setup() -> None:
