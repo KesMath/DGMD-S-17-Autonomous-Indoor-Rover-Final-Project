@@ -27,8 +27,10 @@ def setup() -> None:
     GPIO.setup(INPUT_PIN_4_MOTOR_B, GPIO.OUT)
     GPIO.setup(MOTOR_A_SPEED_ENABLE, GPIO.OUT)
     GPIO.setup(MOTOR_B_SPEED_ENABLE, GPIO.OUT)
-    p = GPIO.PWM(MOTOR_A_SPEED_ENABLE, 100)
-    p.start(50)
+    p1 = GPIO.PWM(MOTOR_A_SPEED_ENABLE, 100)
+    p2 = GPIO.PWM(MOTOR_B_SPEED_ENABLE, 100)
+    p1.start(50) # 50% duty cycle or 50% power
+    p2.start(50)
 
 # Refer to table here for HIGH/LOW combinations <-> movement: https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/
 def motor_off() -> None:
@@ -44,19 +46,29 @@ def move_rover_forward() -> None:
     GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.HIGH)
     GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.LOW)
 
+def move_rover_backward() -> None:
+    GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.HIGH)
+    GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.LOW)
 
+    GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.HIGH)
+    GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.LOW)
+
+# Good video tutorial: https://www.youtube.com/watch?v=Qp4wNdyC2Z0
 def main():
     print("setting up board...")
     setup()
-    while True:
-        move_rover_forward()
-        time.sleep(10)
-
-    p.ChangeDutyCycle(0)
-    print("turning off motors ...")
-    motor_off()
-    print("gpio cleanup...")
-    GPIO.cleanup()
+    try:
+        while True:
+            move_rover_forward()
+            time.sleep(10)
+            move_rover_backward()
+            time.sleep(10)
+    except KeyboardInterrupt:
+        print("turning off motors ...")
+        motor_off()
+    finally:
+        print("gpio cleanup...")
+        GPIO.cleanup()
     
 if __name__ == '__main__':
     main()
