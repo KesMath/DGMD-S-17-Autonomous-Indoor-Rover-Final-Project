@@ -30,7 +30,7 @@ GPIO.setup(MOTOR_B_SPEED_ENABLE, GPIO.OUT)
 
 # Reference on Pulse Width Modulation (PWM): https://raspi.tv/2013/rpi-gpio-0-5-2a-now-has-software-pwm-how-to-use-it
 p1 = GPIO.PWM(MOTOR_A_SPEED_ENABLE, 100)
-#p2 = GPIO.PWM(MOTOR_B_SPEED_ENABLE, 100)
+p2 = GPIO.PWM(MOTOR_B_SPEED_ENABLE, 100)
 p1.start(50) # 50% duty cycle or 50% power
 p2.start(50)
 
