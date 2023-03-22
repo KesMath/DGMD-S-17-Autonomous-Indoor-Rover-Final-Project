@@ -43,15 +43,15 @@ def move_rover_forward() -> None:
     GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.LOW)
 
 def main():
-    GPIO.cleanup()
     print("setting up board...")
     setup()
-    print("motor off - initial state...")
-    motor_off()
+    #print("motor off - initial state...")
+    #motor_off()
     print("moving rover forward...")
     move_rover_forward()
-    print("motor off - powering down...")
-    motor_off()
+    #print("motor off - powering down...")
+    #motor_off()
+    print("gpio cleanup...")
     GPIO.cleanup()
     
 if __name__ == '__main__':
