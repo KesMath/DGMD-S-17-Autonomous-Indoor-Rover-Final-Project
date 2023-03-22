@@ -42,15 +42,17 @@ def move_rover_forward() -> None:
     GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.HIGH)
     GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.LOW)
 
+def full_speed() -> None:
+    GPIO.output(MOTOR_A_SPEED, GPIO.HIGH)
+    GPIO.output(MOTOR_B_SPEED, GPIO.HIGH)
+
 def main():
     print("setting up board...")
     setup()
-    #print("motor off - initial state...")
-    #motor_off()
     print("moving rover forward...")
-    move_rover_forward()
-    #print("motor off - powering down...")
-    #motor_off()
+    full_speed()
+    print("motor off - powering down...")
+    motor_off()
     print("gpio cleanup...")
     GPIO.cleanup()
     
