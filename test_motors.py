@@ -32,7 +32,7 @@ GPIO.setup(MOTOR_B_SPEED_ENABLE, GPIO.OUT)
 p1 = GPIO.PWM(MOTOR_A_SPEED_ENABLE, 100)
 #p2 = GPIO.PWM(MOTOR_B_SPEED_ENABLE, 100)
 p1.start(50) # 50% duty cycle or 50% power
-#p2.start(50)
+p2.start(50)
 
 # Refer to table here for HIGH/LOW combinations <-> movement: https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/
 def move_rover_forward() -> None:
@@ -63,7 +63,7 @@ def main():
     finally:
         print("stopping pwm on both motors...")
         p1.stop()
-        #p2.stop()
+        p2.stop()
         print("gpio cleanup...")
         GPIO.cleanup()
     
