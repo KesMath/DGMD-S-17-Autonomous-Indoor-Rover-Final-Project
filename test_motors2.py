@@ -47,6 +47,7 @@ def move_rover_forward() -> None:
 
 def main():
     print("setting up board...")
+    setup()
     while True:
         move_rover_forward()
         time.sleep(10)
