@@ -47,11 +47,11 @@ def move_rover_forward() -> None:
     GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.LOW)
 
 def move_rover_backward() -> None:
-    GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.HIGH)
-    GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.LOW)
+    GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.LOW)
+    GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.HIGH)
 
-    GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.HIGH)
-    GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.LOW)
+    GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.LOW)
+    GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.HIGH)
 
 # Good video tutorial: https://www.youtube.com/watch?v=Qp4wNdyC2Z0
 def main():
@@ -64,9 +64,12 @@ def main():
             move_rover_backward()
             time.sleep(10)
     except KeyboardInterrupt:
-        print("turning off motors ...")
-        motor_off()
+        print("keyboard interupt detected...")
+        pass
     finally:
+        print("stopping pwm on both motors...")
+        p1.stop()
+        p2.stop()
         print("gpio cleanup...")
         GPIO.cleanup()
     
