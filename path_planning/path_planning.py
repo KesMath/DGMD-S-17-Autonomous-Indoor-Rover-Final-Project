@@ -43,6 +43,7 @@ def return_shortest_path(start_point, goal_point, width, height, costmap, resolu
 
     shortest_path = list()
     current_node = None
+    path_exists = False
     sort_func = lambda a: a.get_grid_cost()
     unvisited_queue = SortedKeyList(key = sort_func) # means of book-keeping to store list of unvisited nodes. Idealistically we want this to be a SortedSet so our selection favors nodes with minimum grid costs.
     visited_queue = list() # means of book-keeping to store list of visited nodes
@@ -57,22 +58,24 @@ def return_shortest_path(start_point, goal_point, width, height, costmap, resolu
 
         # check if current node is goal point
         if current_node.get_coordinate_pt() == goal_point:
+            path_exists = True
             break
 
-        # find the neighbors of the current node and add to frontier
+        # find the neighbors of the current node and add to frontier iff it's a new member to the set ... if it exists within set, re-evaluate smaller g_cost if necessary
         neighbors = find_neighbours(node=current_node, width=width, height=height, costmap=costmap, resolution=resolution)
-        [unvisited_queue.add(neighbor) for neighbor in neighbors]
+        #[unvisited_queue.add(neighbor) for neighbor in neighbors]
 
         # add target node to visited
         visited_queue.add(current_node)
 
-    # building path by recursive backtracking
-    while(current_node != None):
-        shortest_path.append(current_node)
-        current_node = current_node.parent
-    
-    shortest_path.reverse()
-    return shortest_path
+    if path_exists:
+        # building path by recursive backtracking
+        while(current_node != None):
+            shortest_path.append(current_node)
+            current_node = current_node.parent
+        shortest_path.reverse()
+        return shortest_path
+    return None
 
 
 def main():
