@@ -24,7 +24,6 @@ class Node:
         return "Node with grid_cost = " + str(self.grid_cost) + " at starting pt: " + str(self.coordinate_pt)
     
 
-# TODO: define explicit types and description for params below
 def find_neighbours(node: Node, width: int, height: int, costmap, resolution) -> Optional[List[Node]]:
     ''' 
     Performs Dijkstra's shortest path algorithm search on a costmap with a given start and goal node
@@ -41,7 +40,6 @@ def find_neighbours(node: Node, width: int, height: int, costmap, resolution) ->
     pass
 
 
-# TODO: define explicit types and description for params below
 def return_shortest_path(start_point, goal_point, width, height, costmap, resolution, origin) -> Optional[List[Node]]:
     ''' 
     Performs Dijkstra's shortest path algorithm search on a costmap with a given start and goal node
