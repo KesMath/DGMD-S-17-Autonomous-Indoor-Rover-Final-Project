@@ -26,6 +26,18 @@ class Node:
 
 # TODO: define explicit types and description for params below
 def find_neighbours(node: Node, width: int, height: int, costmap, resolution) -> Optional[List[Node]]:
+    ''' 
+    Performs Dijkstra's shortest path algorithm search on a costmap with a given start and goal node
+    Parameters:
+        node:       (Node):  neighboring nodes will be derived from this current node 
+        width       (int):   grid width, specified as a positive scalar in meters.
+        height      (int):   grid height, specified as a positive scalar in meters.
+        costmap     ():
+        resolution  ():
+
+    Returns:
+        neighbors (List[Nodes]): if neighbors can be found, else returns None
+    '''
     pass
 
 
@@ -33,9 +45,18 @@ def find_neighbours(node: Node, width: int, height: int, costmap, resolution) ->
 def return_shortest_path(start_point, goal_point, width, height, costmap, resolution, origin) -> Optional[List[Node]]:
     ''' 
     Performs Dijkstra's shortest path algorithm search on a costmap with a given start and goal node
-    Returns: shortest path as List[Nodes] if destination can be found, else returns None 
-    '''
-    '''
+    Parameters:
+        start_point (tuple): starting point on the occupancy grid.
+        goal_point  (tuple): destination point on the occupancy grid.
+        width       (int):   grid width, specified as a positive scalar in meters.
+        height      (int):   grid height, specified as a positive scalar in meters.
+        costmap     ():
+        resolution  ():
+        origin      ():
+
+    Returns:
+        shortest_path (List[Nodes]): if destination can be found, else returns None
+
     Dijkstra's Algorithm can be implemented in 2 phases:
     Phase 1: From a starting point, we incrementally explore other neighboring nodes until the goal_node can be found 
     Phase 2: When goal_node is found, we recursively backtrack to the starting_node, given that each child node's parent attribute is a recursive structure
@@ -97,5 +118,7 @@ def main():
         print(ele)
     for e in l:
         print(e.get_grid_cost())
+    
+    print(return_shortest_path.__doc__)
 if __name__ == '__main__':
     main()
