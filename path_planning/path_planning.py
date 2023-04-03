@@ -31,8 +31,8 @@ def find_neighbours(node: Node, width: int, height: int, costmap, resolution) ->
         node:       (Node):  neighboring nodes will be derived from this current node 
         width       (int):   grid width, specified as a positive scalar in meters.
         height      (int):   grid height, specified as a positive scalar in meters.
-        costmap     ():
-        resolution  ():
+        costmap     (): ?
+        resolution  (): ?
 
     Returns:
         neighbors (List[Nodes]): if neighbors can be found, else returns None
@@ -48,9 +48,9 @@ def return_shortest_path(start_point, goal_point, width, height, costmap, resolu
         goal_point  (tuple): destination point on the occupancy grid.
         width       (int):   grid width, specified as a positive scalar in meters.
         height      (int):   grid height, specified as a positive scalar in meters.
-        costmap     ():
-        resolution  ():
-        origin      ():
+        costmap     (): ?
+        resolution  (): ?
+        origin      (): ?
 
     Returns:
         shortest_path (List[Nodes]): if destination can be found, else returns None
