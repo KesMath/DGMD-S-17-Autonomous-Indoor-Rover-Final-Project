@@ -1,6 +1,8 @@
 from typing import List, Optional
 from sortedcontainers import SortedKeyList
 
+STEP_COST = 1 # cost incurred when moving to a adjacent cell. We assume each grid cell has a side length of 1
+
 class Node:
     def __init__(self, grid_cost: int, coordinate_pt: tuple, parent) -> None:
         self.grid_cost = grid_cost # shortest distance from parent node 
@@ -26,11 +28,12 @@ class Node:
 
 def find_neighbours(node: Node, width: int, height: int, costmap, resolution) -> Optional[List[Node]]:
     ''' 
-    Identifies neighboring nodes (at most 8)
+    Identifies neighboring nodes (at most 4 in this basic implementation).
+    When motors/MotorController() can perform diagonal turns, neighboring nodes can be at most 8.
     Parameters:
         node:       (Node):  neighboring nodes will be derived from this current node 
-        width       (int):   grid width, specified as a positive scalar in meters.
-        height      (int):   grid height, specified as a positive scalar in meters.
+        width       (int):   grid width, specified as a positive scalar in meters. A node's X-coordinate value cannot exceed this value!
+        height      (int):   grid height, specified as a positive scalar in meters. A node's Y-coordinate value cannot exceed this value!
         costmap     (): ?
         resolution  (): ?
 
@@ -84,21 +87,22 @@ def return_shortest_path(start_point, goal_point, width, height, costmap, resolu
         neighbors = find_neighbours(node=current_node, width=width, height=height, costmap=costmap, resolution=resolution)
         for neighbor in neighbors:
             if neighbor not in visited_queue:
-                
-                # update g_cost if current_node.g_cost < neighbor_node.g_cost
+
                 if neighbor in unvisited_queue:
                     n_index = unvisited_queue.index(neighbor)
                     neighbor_node = unvisited_queue.pop(n_index)
-
-                    if current_node.g_cost < neighbor_node.g_cost:
-                        neighbor_node.update_grid_cost() # TODO: update val = step_cost + grid_cost
+                    
+                    # In this case, we've essentially found a shorter route to an unexplored node
+                    if current_node.grid_cost + STEP_COST < neighbor_node.grid_cost:
+                        neighbor_node.update_grid_cost(current_node.grid_cost + STEP_COST)
                         neighbor_node.parent = current_node
 
                     unvisited_queue.add(neighbor_node)
 
                 # add new neighbor node to open list
                 else:
-                    new_node = Node(grid_cost=, coordinate_pt=, parent=current_node) # TODO: set first 2 params
+                    # TODO: is coordinate point needed? It can be calculated by an incrementor... will make determination after find_neighbours() implementation
+                    new_node = Node(grid_cost= STEP_COST + current_node.grid_cost, coordinate_pt=, parent=current_node) 
                     unvisited_queue.add(new_node)
 
         # add target node to visited
