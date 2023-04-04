@@ -26,7 +26,7 @@ class Node:
 
 def find_neighbours(node: Node, width: int, height: int, costmap, resolution) -> Optional[List[Node]]:
     ''' 
-    Performs Dijkstra's shortest path algorithm search on a costmap with a given start and goal node
+    Identifies neighboring nodes (at most 8)
     Parameters:
         node:       (Node):  neighboring nodes will be derived from this current node 
         width       (int):   grid width, specified as a positive scalar in meters.
@@ -82,7 +82,24 @@ def return_shortest_path(start_point, goal_point, width, height, costmap, resolu
 
         # find the neighbors of the current node and add to frontier iff it's a new member to the set ... if it exists within set, re-evaluate smaller g_cost if necessary
         neighbors = find_neighbours(node=current_node, width=width, height=height, costmap=costmap, resolution=resolution)
-        #[unvisited_queue.add(neighbor) for neighbor in neighbors]
+        for neighbor in neighbors:
+            if neighbor not in visited_queue:
+                
+                # update g_cost if current_node.g_cost < neighbor_node.g_cost
+                if neighbor in unvisited_queue:
+                    n_index = unvisited_queue.index(neighbor)
+                    neighbor_node = unvisited_queue.pop(n_index)
+
+                    if current_node.g_cost < neighbor_node.g_cost:
+                        neighbor_node.update_grid_cost() # TODO: update val = step_cost + grid_cost
+                        neighbor_node.parent = current_node
+
+                    unvisited_queue.add(neighbor_node)
+
+                # add new neighbor node to open list
+                else:
+                    new_node = Node(grid_cost=, coordinate_pt=, parent=current_node) # TODO: set first 2 params
+                    unvisited_queue.add(new_node)
 
         # add target node to visited
         visited_queue.add(current_node)
@@ -98,10 +115,10 @@ def return_shortest_path(start_point, goal_point, width, height, costmap, resolu
 
 
 def main():
-    # TESTING SORTEDLIST with custom KEY!
-    node1 = Node(0,(0,0), None)
+    # TESTING SORTEDKEYLIST with custom KEY!
+    node1 = Node(0.1,(0,0), None)
     node2 = Node(1,(1,0), None)
-    node3 = Node(1,(0,1), None)
+    node3 = Node(2,(0,2), None)
     l = list()
     l.append(node2)
     l.append(node1)
@@ -112,11 +129,27 @@ def main():
     sort_list.add(node1)
     sort_list.add(node3)
     #######################
+    # for ele in sort_list:
+    #     print(ele)
+    # for e in l:
+    #     print(e.get_grid_cost())
+    
+    # TESTING SORTEDKEYLIST auto-sorts after updating a member's value!!
+    # one way is to lookup index of item, pop by index, make manual update and re_add
+    n_index = sort_list.index(node2)
+    print("Index of Node1: " + str(n_index))
+    popped_node = sort_list.pop(n_index)
+    print(popped_node)
+    print("*******")
     for ele in sort_list:
         print(ele)
-    for e in l:
-        print(e.get_grid_cost())
-    
-    print(return_shortest_path.__doc__)
+    print("length after popped: " + str(len(sort_list)))
+    popped_node.update_grid_cost(0.05)
+    sort_list.add(popped_node)
+    for ele in sort_list:
+        print(ele)
+
+    # TESTING membership in SORTEDKEYLIST!!
+    print("MEMBERSHIP: " + str(node3 in sort_list))
 if __name__ == '__main__':
     main()
