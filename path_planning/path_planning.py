@@ -1,3 +1,4 @@
+import numpy as np
 from typing import List, Optional
 from sortedcontainers import SortedKeyList
 
@@ -19,23 +20,24 @@ class Node:
     def get_parent(self):
         return self.parent
     
-    def get_coordinate_pt(self):
+    def get_coordinate_pt(self) -> tuple:
         return self.coordinate_pt
 
     def __str__(self):
         return "Node with grid_cost = " + str(self.grid_cost) + " at starting pt: " + str(self.coordinate_pt)
     
 
-def find_neighbours(node: Node, width: int, height: int, costmap, resolution) -> Optional[List[Node]]:
+# Grid Map Reference: https://automaticaddison.com/what-is-an-occupancy-grid-map/
+def find_neighbours(node: Node, width: int, height: int, gridmap, resolution) -> Optional[List[Node]]:
     ''' 
     Identifies neighboring nodes (at most 4 in this basic implementation).
     When motors/MotorController() can perform diagonal turns, neighboring nodes can be at most 8.
     Parameters:
-        node:       (Node):  neighboring nodes will be derived from this current node 
-        width       (int):   grid width, specified as a positive scalar in meters. A node's X-coordinate value cannot exceed this value!
-        height      (int):   grid height, specified as a positive scalar in meters. A node's Y-coordinate value cannot exceed this value!
-        costmap     (): ?
-        resolution  (): ?
+        node:          (Node):       neighboring nodes will be derived from this current node 
+        width          (int):        grid width (or number of columns), specified as a positive scalar in meters. A node's X-coordinate value cannot exceed this value!
+        height         (int):        grid height (or number of rows), specified as a positive scalar in meters. A node's Y-coordinate value cannot exceed this value!
+        gridmap        (np.ndarray): 2D array corresponding where [row][col] indices represent a grid square being freed (i.e. binary value = 0) or occupied (i.e. binary value = 1). Value of -1 implies an unscanned areas
+        resolution     (float):      side of each grid map square in feet
 
     Returns:
         neighbors (List[Nodes]): if neighbors can be found, else returns None
@@ -43,17 +45,16 @@ def find_neighbours(node: Node, width: int, height: int, costmap, resolution) ->
     pass
 
 
-def return_shortest_path(start_point, goal_point, width, height, costmap, resolution, origin) -> Optional[List[Node]]:
+def return_shortest_path(start_point, goal_point, width, height, gridmap, resolution) -> Optional[List[Node]]:
     ''' 
     Performs Dijkstra's shortest path algorithm search on a costmap with a given start and goal node
     Parameters:
-        start_point (tuple): starting point on the occupancy grid.
-        goal_point  (tuple): destination point on the occupancy grid.
-        width       (int):   grid width, specified as a positive scalar in meters.
-        height      (int):   grid height, specified as a positive scalar in meters.
-        costmap     (): ?
-        resolution  (): ?
-        origin      (): ?
+        start_point     (tuple):      starting point on the occupancy grid.
+        goal_point      (tuple):      destination point on the occupancy grid.
+        width           (int):        grid width (or number of columns), specified as a positive scalar in meters.
+        height          (int):        grid height (or number of rows), specified as a positive scalar in meters.
+        gridmap         (np.ndarray): 2D array corresponding where [row][col] indices represent a grid square being freed (i.e. binary value = 0) or occupied (i.e. binary value = 1). Value of -1 implies an unscanned areas
+        resolution      (float):      side of each grid map square in feet
 
     Returns:
         shortest_path (List[Nodes]): if destination can be found, else returns None
@@ -84,7 +85,7 @@ def return_shortest_path(start_point, goal_point, width, height, costmap, resolu
             break
 
         # find the neighbors of the current node and add to frontier iff it's a new member to the set ... if it exists within set, re-evaluate smaller g_cost if necessary
-        neighbors = find_neighbours(node=current_node, width=width, height=height, costmap=costmap, resolution=resolution)
+        neighbors = find_neighbours(node=current_node, width=width, height=height, costmap=costmap, grid_square_sz=grid_square_sz)
         for neighbor in neighbors:
             if neighbor not in visited_queue:
 
@@ -102,7 +103,7 @@ def return_shortest_path(start_point, goal_point, width, height, costmap, resolu
                 # add new neighbor node to open list
                 else:
                     # TODO: is coordinate point needed? It can be calculated by an incrementor... will make determination after find_neighbours() implementation
-                    new_node = Node(grid_cost= STEP_COST + current_node.grid_cost, coordinate_pt=, parent=current_node) 
+                    #new_node = Node(grid_cost= STEP_COST + current_node.grid_cost, coordinate_pt=, parent=current_node) 
                     unvisited_queue.add(new_node)
 
         # add target node to visited
@@ -155,5 +156,7 @@ def main():
 
     # TESTING membership in SORTEDKEYLIST!!
     print("MEMBERSHIP: " + str(node3 in sort_list))
+
+    # TODO: MOCK DATA to Show Shortest Path Can be Generated!
 if __name__ == '__main__':
     main()
