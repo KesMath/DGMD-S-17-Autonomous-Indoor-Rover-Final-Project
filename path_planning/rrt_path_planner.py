@@ -30,8 +30,4 @@ def return_shortest_path(start_point, goal_point, width, height, gridmap, resolu
 
     Returns:
         shortest_path (List[Nodes]): if destination can be found, else returns None
-
-    Dijkstra's Algorithm can be implemented in 2 phases:
-    Phase 1: From a starting point, we incrementally explore other neighboring nodes until the goal_node can be found 
-    Phase 2: When goal_node is found, we recursively backtrack to the starting_node, given that each child node's parent attribute is a recursive structure
     '''

@@ -89,22 +89,21 @@ def return_shortest_path(start_point, goal_point, width, height, gridmap, resolu
         for neighbor in neighbors:
             if neighbor not in visited_queue:
 
+                # In this case, we've essentially found a shorter route to an unexplored node 
                 if neighbor in unvisited_queue:
                     n_index = unvisited_queue.index(neighbor)
                     neighbor_node = unvisited_queue.pop(n_index)
                     
-                    # In this case, we've essentially found a shorter route to an unexplored node
+
                     if current_node.grid_cost + STEP_COST < neighbor_node.grid_cost:
                         neighbor_node.update_grid_cost(current_node.grid_cost + STEP_COST)
                         neighbor_node.parent = current_node
 
                     unvisited_queue.add(neighbor_node)
 
-                # add new neighbor node to open list
+                # add neighbor node to open list since it's first occurrence
                 else:
-                    # TODO: is coordinate point needed? It can be calculated by an incrementor... will make determination after find_neighbours() implementation
-                    #new_node = Node(grid_cost= STEP_COST + current_node.grid_cost, coordinate_pt=, parent=current_node) 
-                    unvisited_queue.add(new_node)
+                    unvisited_queue.add(neighbor)
 
         # add target node to visited
         visited_queue.add(current_node)
