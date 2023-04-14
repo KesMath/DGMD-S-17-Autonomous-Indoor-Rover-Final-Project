@@ -1,32 +1,10 @@
+from node import Node
 from typing import List, Optional
 from sortedcontainers import SortedKeyList
 
 STEP_COST = 1 # cost incurred when moving to a adjacent cell. We assume each grid cell has a side length of 1
 FREE_SPACE = 0
 OBSTACLES = 1
-
-class Node:
-    def __init__(self, grid_cost: int, coordinate_pt: tuple, parent) -> None:
-        self.grid_cost = grid_cost # shortest distance from parent node 
-        self.parent = parent
-        self.coordinate_pt = coordinate_pt
-    
-    def update_grid_cost(self, val: int) -> None:
-        if val >= 0:
-            self.grid_cost = val
-    
-    def get_grid_cost(self) -> int:
-        return self.grid_cost
-
-    def get_parent(self):
-        return self.parent
-    
-    def get_coordinate_pt(self) -> tuple:
-        return self.coordinate_pt
-
-    def __str__(self):
-        return "Node with grid_cost = " + str(self.grid_cost) + " at starting pt: " + str(self.coordinate_pt)
-
 
 def is_within_grid_bounds(n: int, boundary: int) -> bool:
     return n >= 0 and n <= boundary  
@@ -63,22 +41,22 @@ def find_neighbours(node: Node, width: int, height: int, gridmap, resolution) ->
         # check left within grid bounds
         if is_within_grid_bounds(LEFT, width):
             if gridmap[coordinates[0]][LEFT] == FREE_SPACE:
-                neighbors.append(Node(grid_cost = resolution, coordinate_pt = (coordinates[0], LEFT), parent = node))
+                neighbors.append(Node(grid_cost = resolution + node.get_grid_cost(), coordinate_pt = (coordinates[0], LEFT), parent = node))
 
         # check right within grid bounds
         if is_within_grid_bounds(RIGHT, width):
             if gridmap[coordinates[0]][RIGHT] == FREE_SPACE:
-                neighbors.append(Node(grid_cost = resolution, coordinate_pt = (coordinates[0], RIGHT), parent = node))
+                neighbors.append(Node(grid_cost = resolution + node.get_grid_cost(), coordinate_pt = (coordinates[0], RIGHT), parent = node))
 
         # check up within grid bounds
         if is_within_grid_bounds(UP, height):
             if gridmap[UP][coordinates[1]] == FREE_SPACE:
-                neighbors.append(Node(grid_cost = resolution, coordinate_pt = (UP, coordinates[1]), parent = node))
+                neighbors.append(Node(grid_cost = resolution + node.get_grid_cost(), coordinate_pt = (UP, coordinates[1]), parent = node))
 
         # check down within grid bounds
         if is_within_grid_bounds(DOWN, height):
             if gridmap[DOWN][coordinates[1]] == FREE_SPACE:
-                neighbors.append(Node(grid_cost = resolution, coordinate_pt = (DOWN, coordinates[1]), parent = node))
+                neighbors.append(Node(grid_cost = resolution + node.get_grid_cost(), coordinate_pt = (DOWN, coordinates[1]), parent = node))
 
     return neighbors
 
@@ -194,7 +172,19 @@ def main():
     # TESTING membership in SORTEDKEYLIST!!
     print("MEMBERSHIP: " + str(node3 in sort_list))
 
-    # TODO: MOCK DATA to Show Shortest Path Can be Generated!
+    
+    ###########################
+    # TEST FINDING NEIGHBORS
+    ###########################
+
+    # TEST ALL CORNERS OF GRID RETURN 2 NEIGHBORS
+
+    # TEST CENTER POINT RETURNS 4 NEIGHBORS
+
+
+    ###########################
+    # TEST SHORTEST PATH
+    ###########################
     
 if __name__ == '__main__':
     main()
