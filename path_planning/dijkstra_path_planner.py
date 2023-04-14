@@ -1,8 +1,9 @@
-import numpy as np
 from typing import List, Optional
 from sortedcontainers import SortedKeyList
 
 STEP_COST = 1 # cost incurred when moving to a adjacent cell. We assume each grid cell has a side length of 1
+FREE_SPACE = 0
+OBSTACLES = 1
 
 class Node:
     def __init__(self, grid_cost: int, coordinate_pt: tuple, parent) -> None:
@@ -25,24 +26,61 @@ class Node:
 
     def __str__(self):
         return "Node with grid_cost = " + str(self.grid_cost) + " at starting pt: " + str(self.coordinate_pt)
-    
+
+
+def is_within_grid_bounds(n: int, boundary: int) -> bool:
+    return n >= 0 and n <= boundary  
 
 # Grid Map Reference: https://automaticaddison.com/what-is-an-occupancy-grid-map/
+# TODO: CODE CLEANUP: can remove width and height params as this is implicity declared within gridmap dimensions!
 def find_neighbours(node: Node, width: int, height: int, gridmap, resolution) -> Optional[List[Node]]:
     ''' 
-    Identifies neighboring nodes (at most 4 in this basic implementation).
+    Identifies von Neumann neighborhood (i.e. up, down, left, right).
     When motors/MotorController() can perform diagonal turns, neighboring nodes can be at most 8.
     Parameters:
         node:          (Node):       neighboring nodes will be derived from this current node 
         width          (int):        grid width (or number of columns), specified as a positive scalar in meters. A node's X-coordinate value cannot exceed this value!
         height         (int):        grid height (or number of rows), specified as a positive scalar in meters. A node's Y-coordinate value cannot exceed this value!
-        gridmap        (np.ndarray): 2D array corresponding where [row][col] indices represent a grid square being freed (i.e. binary value = 0) or occupied (i.e. binary value = 1). Value of -1 implies an unscanned areas
-        resolution     (float):      side of each grid map square in feet
+        gridmap        (np.ndarray): NxN 2D array corresponding where [row][col] indices represent a grid square being freed (i.e. binary value = 0) or occupied (i.e. binary value = 1). Value of -1 implies an unscanned areas
+        resolution     (float):      side of each grid map square in feet .. we assume it's equal to STEP_COST for this scenario
 
     Returns:
         neighbors (List[Nodes]): if neighbors can be found, else returns None
     '''
-    pass
+    assert width == len(gridmap[0])
+    assert height == len(gridmap)
+    assert width == height
+
+    neighbors = list()
+    coordinates = node.get_coordinate_pt()
+    LEFT = coordinates[0] - 1
+    RIGHT = coordinates[0] + 1
+    UP = coordinates[1] - 1
+    DOWN = coordinates[1] + 1
+    
+    # avoid obstacles
+    if gridmap[coordinates[0]][coordinates[1]] != OBSTACLES:
+        # check left within grid bounds
+        if is_within_grid_bounds(LEFT, width):
+            if gridmap[coordinates[0]][LEFT] == FREE_SPACE:
+                neighbors.append(Node(grid_cost = resolution, coordinate_pt = (coordinates[0], LEFT), parent = node))
+
+        # check right within grid bounds
+        if is_within_grid_bounds(RIGHT, width):
+            if gridmap[coordinates[0]][RIGHT] == FREE_SPACE:
+                neighbors.append(Node(grid_cost = resolution, coordinate_pt = (coordinates[0], RIGHT), parent = node))
+
+        # check up within grid bounds
+        if is_within_grid_bounds(UP, height):
+            if gridmap[UP][coordinates[1]] == FREE_SPACE:
+                neighbors.append(Node(grid_cost = resolution, coordinate_pt = (UP, coordinates[1]), parent = node))
+
+        # check down within grid bounds
+        if is_within_grid_bounds(DOWN, height):
+            if gridmap[DOWN][coordinates[1]] == FREE_SPACE:
+                neighbors.append(Node(grid_cost = resolution, coordinate_pt = (DOWN, coordinates[1]), parent = node))
+
+    return neighbors
 
 
 def return_shortest_path(start_point, goal_point, width, height, gridmap, resolution) -> Optional[List[Node]]:
@@ -53,7 +91,7 @@ def return_shortest_path(start_point, goal_point, width, height, gridmap, resolu
         goal_point      (tuple):      destination point on the occupancy grid.
         width           (int):        grid width (or number of columns), specified as a positive scalar in meters.
         height          (int):        grid height (or number of rows), specified as a positive scalar in meters.
-        gridmap         (np.ndarray): 2D array corresponding where [row][col] indices represent a grid square being freed (i.e. binary value = 0) or occupied (i.e. binary value = 1). Value of -1 implies an unscanned areas
+        gridmap         (np.ndarray): 2D array corresponding where [height][width] indices represent a grid square being freed (i.e. binary value = 0) or occupied (i.e. binary value = 1). Value of -1 implies an unscanned areas
         resolution      (float):      side of each grid map square in feet
 
     Returns:
@@ -85,7 +123,7 @@ def return_shortest_path(start_point, goal_point, width, height, gridmap, resolu
             break
 
         # find the neighbors of the current node and add to frontier iff it's a new member to the set ... if it exists within set, re-evaluate smaller g_cost if necessary
-        neighbors = find_neighbours(node=current_node, width=width, height=height, costmap=costmap, grid_square_sz=grid_square_sz)
+        neighbors = find_neighbours(node=current_node, width=width, height=height, gridmap=gridmap, resolution=STEP_COST)
         for neighbor in neighbors:
             if neighbor not in visited_queue:
 
