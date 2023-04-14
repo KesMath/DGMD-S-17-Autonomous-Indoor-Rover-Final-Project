@@ -171,20 +171,6 @@ def main():
 
     # TESTING membership in SORTEDKEYLIST!!
     print("MEMBERSHIP: " + str(node3 in sort_list))
-
-    
-    ###########################
-    # TEST FINDING NEIGHBORS
-    ###########################
-
-    # TEST ALL CORNERS OF GRID RETURN 2 NEIGHBORS
-
-    # TEST CENTER POINT RETURNS 4 NEIGHBORS
-
-
-    ###########################
-    # TEST SHORTEST PATH
-    ###########################
     
 if __name__ == '__main__':
     main()
