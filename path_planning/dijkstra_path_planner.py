@@ -7,7 +7,7 @@ FREE_SPACE = 0
 OBSTACLES = 1
 
 def is_within_grid_bounds(n: int, boundary: int) -> bool:
-    return n >= 0 and n <= boundary  
+    return n >= 0 and n < boundary  
 
 # Grid Map Reference: https://automaticaddison.com/what-is-an-occupancy-grid-map/
 # TODO: CODE CLEANUP: can remove width and height params as this is implicity declared within gridmap dimensions!
@@ -31,10 +31,10 @@ def find_neighbours(node: Node, width: int, height: int, gridmap, resolution) ->
 
     neighbors = list()
     coordinates = node.get_coordinate_pt()
-    LEFT = coordinates[0] - 1
-    RIGHT = coordinates[0] + 1
-    UP = coordinates[1] - 1
-    DOWN = coordinates[1] + 1
+    LEFT = coordinates[1] - 1
+    RIGHT = coordinates[1] + 1
+    UP = coordinates[0] - 1
+    DOWN = coordinates[0] + 1
     
     # avoid obstacles
     if gridmap[coordinates[0]][coordinates[1]] != OBSTACLES:
