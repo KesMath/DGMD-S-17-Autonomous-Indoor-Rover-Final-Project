@@ -78,9 +78,6 @@ class TestPathPlanner(unittest.TestCase):
         # assert coordinates are as expected
         self.assertEqual(expected[0].get_coordinate_pt(), actual[0].get_coordinate_pt())
         self.assertEqual(expected[1].get_coordinate_pt(), actual[1].get_coordinate_pt())
-
-        for e in actual:
-            print(e)
         
         # assert grid cost is as expected
         self.assertEqual(expected[0].grid_cost, actual[0].grid_cost)
@@ -91,7 +88,27 @@ class TestPathPlanner(unittest.TestCase):
             self.assertEqual(node.parent, parent_node)
 
     def test_upper_left_cell_returns_two_neighbors(self):
-        pass
+        expected = list()
+        parent_node = Node(grid_cost = 0, coordinate_pt = (0,0), parent = None)
+
+        expected.append(Node(grid_cost = 1, coordinate_pt = (0,1), parent = parent_node)) # RIGHT
+        expected.append(Node(grid_cost = 1, coordinate_pt = (1,0), parent = parent_node)) # DOWN
+
+        actual = find_neighbours(node=parent_node, width=5, height=5, gridmap=OCCUPANCY_GRID, resolution=STEP_COST)
+
+        assert(len(actual) == len(expected))
+
+        # assert coordinates are as expected
+        self.assertEqual(expected[0].get_coordinate_pt(), actual[0].get_coordinate_pt())
+        self.assertEqual(expected[1].get_coordinate_pt(), actual[1].get_coordinate_pt())
+        
+        # assert grid cost is as expected
+        self.assertEqual(expected[0].grid_cost, actual[0].grid_cost)
+        self.assertEqual(expected[1].grid_cost, actual[1].grid_cost)
+
+        # assert parent node is as expected
+        for node in actual:
+            self.assertEqual(node.parent, parent_node)
     
     def test_upper_right_cell_returns_two_neighbors(self):
         pass
