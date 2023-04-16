@@ -3,11 +3,11 @@ from copy import deepcopy
 from dijkstra_path_planner import *
 
 
-OCCUPANCY_GRID = [[0,0,0,0,0],
-                  [0,0,0,0,0],
-                  [0,0,0,0,0],
-                  [0,0,0,0,0],
-                  [0,0,0,0,0]]
+EMPTY_GRID =   [[0,0,0,0,0],
+                [0,0,0,0,0],
+                [0,0,0,0,0],
+                [0,0,0,0,0],
+                [0,0,0,0,0]]
 
 class TestPathPlanner(unittest.TestCase):
 
@@ -20,7 +20,7 @@ class TestPathPlanner(unittest.TestCase):
         expected.append(Node(grid_cost = 1, coordinate_pt = (1,2), parent = parent_node)) # UP
         expected.append(Node(grid_cost = 1, coordinate_pt = (3,2), parent = parent_node)) # DOWN
 
-        actual = find_neighbours(node=parent_node, width=5, height=5, gridmap=OCCUPANCY_GRID, resolution=STEP_COST)
+        actual = find_neighbours(node=parent_node, width=5, height=5, gridmap=EMPTY_GRID, resolution=STEP_COST)
         
         assert(len(actual) == len(expected))
 
@@ -48,7 +48,7 @@ class TestPathPlanner(unittest.TestCase):
         expected.append(Node(grid_cost = 1, coordinate_pt = (4,1), parent = parent_node)) # RIGHT
         expected.append(Node(grid_cost = 1, coordinate_pt = (3,0), parent = parent_node)) # UP
 
-        actual = find_neighbours(node=parent_node, width=5, height=5, gridmap=OCCUPANCY_GRID, resolution=STEP_COST)
+        actual = find_neighbours(node=parent_node, width=5, height=5, gridmap=EMPTY_GRID, resolution=STEP_COST)
 
         assert(len(actual) == len(expected))
 
@@ -72,7 +72,7 @@ class TestPathPlanner(unittest.TestCase):
         expected.append(Node(grid_cost = 1, coordinate_pt = (4,3), parent = parent_node)) # LEFT
         expected.append(Node(grid_cost = 1, coordinate_pt = (3,4), parent = parent_node)) # UP
 
-        actual = find_neighbours(node=parent_node, width=5, height=5, gridmap=OCCUPANCY_GRID, resolution=STEP_COST)
+        actual = find_neighbours(node=parent_node, width=5, height=5, gridmap=EMPTY_GRID, resolution=STEP_COST)
 
         assert(len(actual) == len(expected))
 
@@ -95,7 +95,7 @@ class TestPathPlanner(unittest.TestCase):
         expected.append(Node(grid_cost = 1, coordinate_pt = (0,1), parent = parent_node)) # RIGHT
         expected.append(Node(grid_cost = 1, coordinate_pt = (1,0), parent = parent_node)) # DOWN
 
-        actual = find_neighbours(node=parent_node, width=5, height=5, gridmap=OCCUPANCY_GRID, resolution=STEP_COST)
+        actual = find_neighbours(node=parent_node, width=5, height=5, gridmap=EMPTY_GRID, resolution=STEP_COST)
 
         assert(len(actual) == len(expected))
 
@@ -118,7 +118,7 @@ class TestPathPlanner(unittest.TestCase):
         expected.append(Node(grid_cost = 1, coordinate_pt = (0,3), parent = parent_node)) # LEFT
         expected.append(Node(grid_cost = 1, coordinate_pt = (1,4), parent = parent_node)) # DOWN
 
-        actual = find_neighbours(node=parent_node, width=5, height=5, gridmap=OCCUPANCY_GRID, resolution=STEP_COST)
+        actual = find_neighbours(node=parent_node, width=5, height=5, gridmap=EMPTY_GRID, resolution=STEP_COST)
 
         assert(len(actual) == len(expected))
 
@@ -138,7 +138,7 @@ class TestPathPlanner(unittest.TestCase):
     def test_cell_ignores_one_occupied_neighbor(self):
         expected = list()
         parent_node = Node(grid_cost = 0, coordinate_pt = (2,2), parent = None)
-        temp_grid = deepcopy(OCCUPANCY_GRID)
+        temp_grid = deepcopy(EMPTY_GRID)
 
         # occupying left adjacent neighbor
         temp_grid[2][1] = 1  # LEFT
@@ -169,7 +169,7 @@ class TestPathPlanner(unittest.TestCase):
     def test_cell_ignores_two_occupied_neighbors(self):
         expected = list()
         parent_node = Node(grid_cost = 0, coordinate_pt = (2,2), parent = None)
-        temp_grid = deepcopy(OCCUPANCY_GRID)
+        temp_grid = deepcopy(EMPTY_GRID)
 
         # occupying left and righht adjacent neighbors
         temp_grid[2][1] = 1  # LEFT
@@ -197,7 +197,7 @@ class TestPathPlanner(unittest.TestCase):
     def test_cell_ignores_three_occupied_neighbors(self):
         expected = list()
         parent_node = Node(grid_cost = 0, coordinate_pt = (2,2), parent = None)
-        temp_grid = deepcopy(OCCUPANCY_GRID)
+        temp_grid = deepcopy(EMPTY_GRID)
 
         # occupying left and righht adjacent neighbors
         temp_grid[2][1] = 1  # LEFT
@@ -223,7 +223,7 @@ class TestPathPlanner(unittest.TestCase):
     
     def test_cell_has_no_free_neighbors(self):
         parent_node = Node(grid_cost = 0, coordinate_pt = (2,2), parent = None)
-        temp_grid = deepcopy(OCCUPANCY_GRID)
+        temp_grid = deepcopy(EMPTY_GRID)
 
         # occupying all adjacent neighbors around parent node
         temp_grid[2][1] = 1  # LEFT
