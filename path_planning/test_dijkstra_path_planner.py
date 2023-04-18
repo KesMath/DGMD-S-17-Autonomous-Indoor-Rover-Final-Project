@@ -3,6 +3,10 @@ from grid_maps import *
 from copy import deepcopy
 from dijkstra_path_planner import *
 
+'''
+python3 path_planning/test_dijkstra_path_planner.py
+'''
+
 class TestPathPlanner(unittest.TestCase):
 
     def test_center_cell_returns_four_neighbors(self):
