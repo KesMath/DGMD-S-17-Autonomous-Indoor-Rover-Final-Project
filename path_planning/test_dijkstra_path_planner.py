@@ -243,12 +243,22 @@ class TestPathPlanner(unittest.TestCase):
         path = return_shortest_path(start_point = (2,2), goal_point = (0,4), width = 5, height = 5, gridmap= BOXED_IN_GRID, resolution = STEP_COST)
         self.assertIsNone(path)
 
-    
     def test_shortest_path_in_diagonally_occupied_grid(self):
         expected_coordinates = list()
         # generates shortest path from starting point = (bottom left corner) to goal_point = (top right corner) as a Zig Zag shape traversal
         path = return_shortest_path(start_point = (4,0), goal_point = (0,4), width = 5, height = 5, gridmap= DIAGONAL_OCCUPIED_GRID, resolution = STEP_COST)
         expected_coordinates.extend([(4,0), (4,1), (4,2), (3,2), (2,2), (2,3), (2,4), (1,4), (0,4)])
+        assert len(path) == len(expected_coordinates)
+        for i in range(0, len(path)):
+            assert path[i].get_coordinate_pt() == expected_coordinates[i]
+
+    
+    def test_shortest_path_in_occupied_grid1(self):
+        expected_coordinates = list()
+        # generates shortest path from starting point = (bottom left corner) to goal_point = (top right corner) as a Zig Zag shape traversal
+        path = return_shortest_path(start_point = (4,0), goal_point = (0,4), width = 5, height = 5, gridmap= OCCUPIED_GRID1, resolution = STEP_COST)
+        expected_coordinates.extend([(4,0), (3,0), (3,1), (2,1), (1,1), (1,2), (1,3), (1,4), (0,4)])
+
         assert len(path) == len(expected_coordinates)
         for i in range(0, len(path)):
             assert path[i].get_coordinate_pt() == expected_coordinates[i]
