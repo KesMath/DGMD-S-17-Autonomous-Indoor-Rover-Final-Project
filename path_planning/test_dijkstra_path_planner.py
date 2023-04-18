@@ -228,5 +228,18 @@ class TestPathPlanner(unittest.TestCase):
         actual = find_neighbours(node=parent_node, width=5, height=5, gridmap=temp_grid, resolution=STEP_COST)
         self.assertEqual(len(actual), 0)
 
+
+    def test_shortest_path_in_empty_grid(self):
+        expected_path = list()
+        # generates shortest path from starting point = (bottom left corner) to goal_point = (top right corner)
+        path = return_shortest_path(start_point = (4,0), goal_point = (0,4), width = 5, height = 5, gridmap= EMPTY_GRID, resolution = STEP_COST)
+        for node in path:
+            print(node)
+
+    
+    def test_shortest_path_does_not_exist(self):
+        pass
+        
+
 if __name__ == '__main__':
     unittest.main()

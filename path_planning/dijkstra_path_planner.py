@@ -122,7 +122,7 @@ def return_shortest_path(start_point, goal_point, width, height, gridmap, resolu
                     unvisited_queue.add(neighbor)
 
         # add target node to visited
-        visited_queue.add(current_node)
+        visited_queue.append(current_node)
 
     if path_exists:
         # building path by recursive backtracking
