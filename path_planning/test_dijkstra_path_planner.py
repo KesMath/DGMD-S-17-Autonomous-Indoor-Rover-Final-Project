@@ -229,16 +229,29 @@ class TestPathPlanner(unittest.TestCase):
         self.assertEqual(len(actual), 0)
 
     def test_shortest_path_in_empty_grid(self):
-        expected_path = list()
-        # generates shortest path from starting point = (bottom left corner) to goal_point = (top right corner)
+        expected_coordinates = list()
+        # generates shortest path from starting point = (bottom left corner) to goal_point = (top right corner) as an L shape traversal
         path = return_shortest_path(start_point = (4,0), goal_point = (0,4), width = 5, height = 5, gridmap= EMPTY_GRID, resolution = STEP_COST)
-        for node in path:
-            print(node)
+        expected_coordinates.extend([(4,0), (4,1), (4,2), (4,3), (4,4), (3,4), (2,4), (1,4), (0,4)])
+        assert len(path) == len(expected_coordinates)
+        for i in range(0, len(path)):
+            assert path[i].get_coordinate_pt() == expected_coordinates[i]
     
     def test_shortest_path_does_not_exist(self):
-        # rover is boxed in thus no shortest path exists
+        # Recall rover cannot travel diagonally hence when
+        # rover is boxed in, there is no shortest path!
         path = return_shortest_path(start_point = (2,2), goal_point = (0,4), width = 5, height = 5, gridmap= BOXED_IN_GRID, resolution = STEP_COST)
         self.assertIsNone(path)
+
+    
+    def test_shortest_path_in_diagonally_occupied_grid(self):
+        expected_coordinates = list()
+        # generates shortest path from starting point = (bottom left corner) to goal_point = (top right corner) as a Zig Zag shape traversal
+        path = return_shortest_path(start_point = (4,0), goal_point = (0,4), width = 5, height = 5, gridmap= DIAGONAL_OCCUPIED_GRID, resolution = STEP_COST)
+        expected_coordinates.extend([(4,0), (4,1), (4,2), (3,2), (2,2), (2,3), (2,4), (1,4), (0,4)])
+        assert len(path) == len(expected_coordinates)
+        for i in range(0, len(path)):
+            assert path[i].get_coordinate_pt() == expected_coordinates[i]
         
 
 if __name__ == '__main__':
