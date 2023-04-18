@@ -1,13 +1,7 @@
 import unittest
+from grid_maps import *
 from copy import deepcopy
 from dijkstra_path_planner import *
-
-
-EMPTY_GRID =   [[0,0,0,0,0],
-                [0,0,0,0,0],
-                [0,0,0,0,0],
-                [0,0,0,0,0],
-                [0,0,0,0,0]]
 
 class TestPathPlanner(unittest.TestCase):
 
