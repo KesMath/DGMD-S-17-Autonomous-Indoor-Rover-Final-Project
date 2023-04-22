@@ -58,6 +58,7 @@ def main():
             time.sleep(10)
             move_rover_backward()
             time.sleep(10)
+            
     except KeyboardInterrupt:
         print("keyboard interupt detected...")
         pass
