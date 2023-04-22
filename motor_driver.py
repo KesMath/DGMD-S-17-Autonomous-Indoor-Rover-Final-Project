@@ -68,6 +68,12 @@ class MotorDriver:
         GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.LOW)
         GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.HIGH)
 
+    def rotate_left(self) -> None:
+        GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.HIGH)
+        GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.LOW)
+
+        GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.LOW)
+        GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.HIGH)
     
     def pivot_left_90_deg(self) -> None:
         pass
@@ -83,19 +89,20 @@ class MotorDriver:
             break
         self.stop_pwm_on_both_motors()
 
-    def move_backward_1_foot(self) -> None:
-        pass
 
     def move_right_1_foot(self) -> None:
-        pass
+        self.pivot_right_90_deg()
+        self.move_forward_1_foot()
     
     def move_left_1_foot(self) -> None:
-        pass
+        self.pivot_left_90_deg()
+        self.move_forward_1_foot()
 
 
 def main():
     motor = MotorDriver()
-    motor.move_forward_1_foot()
+    #motor.move_forward_1_foot()
+    motor.rotate_left()
     GPIO.cleanup()
     # try:
     #     while True:
