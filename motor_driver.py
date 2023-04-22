@@ -39,10 +39,10 @@ class MotorDriver:
         self.p1.start(DUTY_CYLCE) # 50% power for motor 1
         self.p2.start(DUTY_CYLCE) # 50% power for motor 2
 
-    def get_motor1():
+    def get_motor1(self):
         return self.p1
 
-    def get_motor2():
+    def get_motor2(self):
         return self.p2
         
     # Refer to table here for HIGH/LOW combinations <-> movement: https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/
