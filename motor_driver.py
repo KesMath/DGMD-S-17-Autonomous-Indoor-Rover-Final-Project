@@ -48,6 +48,10 @@ class MotorDriver:
 
     def get_motor2(self):
         return self.p2
+
+    def stop_pwm_on_both_motors(self):
+        self.p1.stop() # stop PWM output
+        self.p2.stop() # stop PWM output
         
     # Refer to table here for HIGH/LOW combinations <-> movement: https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/
     def __move_rover_forward(self) -> None:
@@ -71,15 +75,14 @@ class MotorDriver:
     def pivot_right_90_deg(self) -> None:
         pass
 
+
     def move_forward_1_foot(self) -> None:
         while True:
             self.__move_rover_forward()
             time.sleep(MILLESECOND_DELAY_FOR_1_FOOT_TRAVEL * 1000)
             break
 
-        self.p1.stop() # stop PWM output
-        self.p2.stop() # stop PWM output
-
+        self.stop_pwm_on_both_motors()
 
     def move_backward_1_foot(self) -> None:
         pass
