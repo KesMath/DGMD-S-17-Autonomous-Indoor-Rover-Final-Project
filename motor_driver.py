@@ -55,11 +55,11 @@ class MotorDriver:
         
     # Refer to table here for HIGH/LOW combinations <-> movement: https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/
     def __move_rover_forward(self) -> None:
-        GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.HIGH)
-        GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.LOW)
-
         GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.HIGH)
         GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.LOW)
+
+        GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.HIGH)
+        GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.LOW)
 
     def __move_rover_backward(self) -> None:
         GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.LOW)
