@@ -1,7 +1,6 @@
 import time
 import RPi.GPIO as GPIO
 
-
 # Refer to L298 Motor Driver Documentation: https://www.electroduino.com/introduction-to-l298n-motor-driver-how-its-work/
 
 # Pins for Direction Control
@@ -16,47 +15,60 @@ INPUT_PIN_4_MOTOR_B = 18
 MOTOR_A_SPEED_ENABLE = 15
 MOTOR_B_SPEED_ENABLE = 22
 
-# Uses pin numbers not GPIO numbers. Refer to Wiring diagram in above url which illustrates pin numbering being used
-print("setting up board...")
-GPIO.setmode(GPIO.BOARD)
-# setup all pins as output
-GPIO.setup(INPUT_PIN_1_MOTOR_A, GPIO.OUT)
-GPIO.setup(INPUT_PIN_2_MOTOR_A, GPIO.OUT)
+FREQUENCY = 100 # is the number of times per second that a pulse is generated.
+DUTY_CYLCE = 50 # is the percentage of time between pulses that the signal is “high” or “On”.
 
-GPIO.setup(INPUT_PIN_3_MOTOR_B, GPIO.OUT)
-GPIO.setup(INPUT_PIN_4_MOTOR_B, GPIO.OUT)
-GPIO.setup(MOTOR_A_SPEED_ENABLE, GPIO.OUT)
-GPIO.setup(MOTOR_B_SPEED_ENABLE, GPIO.OUT)
+class MotorDriver:
+    def __init__(self):
 
-# Reference on Pulse Width Modulation (PWM): https://raspi.tv/2013/rpi-gpio-0-5-2a-now-has-software-pwm-how-to-use-it
-p1 = GPIO.PWM(MOTOR_A_SPEED_ENABLE, 100)
-p2 = GPIO.PWM(MOTOR_B_SPEED_ENABLE, 100)
-p1.start(50) # 50% duty cycle or 50% power for motor 1
-p2.start(50) # 50% duty cycle or 50% power for motor 2
+        # Uses pin numbers not GPIO numbers. Refer to Wiring diagram https://docs.viam.com/try-viam/rover-resources/rover-tutorial/ which illustrates pin numbering being used
+        GPIO.setmode(GPIO.BOARD)
+        # setup all pins as output
+        GPIO.setup(INPUT_PIN_1_MOTOR_A, GPIO.OUT)
+        GPIO.setup(INPUT_PIN_2_MOTOR_A, GPIO.OUT)
 
-# Refer to table here for HIGH/LOW combinations <-> movement: https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/
-def move_rover_forward() -> None:
-    GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.HIGH)
-    GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.LOW)
+        GPIO.setup(INPUT_PIN_3_MOTOR_B, GPIO.OUT)
+        GPIO.setup(INPUT_PIN_4_MOTOR_B, GPIO.OUT)
+        GPIO.setup(MOTOR_A_SPEED_ENABLE, GPIO.OUT)
+        GPIO.setup(MOTOR_B_SPEED_ENABLE, GPIO.OUT)
 
-    GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.HIGH)
-    GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.LOW)
+        # Reference on Pulse Width Modulation (PWM): https://raspi.tv/2013/rpi-gpio-0-5-2a-now-has-software-pwm-how-to-use-it
+        self.p1 = GPIO.PWM(MOTOR_A_SPEED_ENABLE, FREQUENCY)
+        self.p2 = GPIO.PWM(MOTOR_B_SPEED_ENABLE, FREQUENCY)
 
-def move_rover_backward() -> None:
-    GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.LOW)
-    GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.HIGH)
+        self.p1.start(DUTY_CYLCE) # 50% power for motor 1
+        self.p2.start(DUTY_CYLCE) # 50% power for motor 2
 
-    GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.LOW)
-    GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.HIGH)
+        def get_motor1():
+            return self.p1
 
-# Good video tutorial: https://www.youtube.com/watch?v=Qp4wNdyC2Z0
-# Rover goes forward for 10 sec then drives back for 10 sec
+        def get_motor2():
+            return self.p2
+        
+        # Refer to table here for HIGH/LOW combinations <-> movement: https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/
+        def move_rover_forward(self) -> None:
+            GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.HIGH)
+            GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.LOW)
+
+            GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.HIGH)
+            GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.LOW)
+
+        def move_rover_backward(self) -> None:
+            GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.LOW)
+            GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.HIGH)
+
+            GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.LOW)
+            GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.HIGH)
+
+
+
 def main():
+    m = MotorDriver()
     try:
         while True:
-            move_rover_forward()
+            m.move_rover_forward()
             time.sleep(10)
-            move_rover_backward()
+            m.move_rover_backward()
             time.sleep(10)
             
     except KeyboardInterrupt:
@@ -64,8 +76,8 @@ def main():
         pass
     finally:
         print("stopping pwm on both motors...")
-        p1.stop()
-        p2.stop()
+        m.get_motor1().stop()
+        m.get_motor2().stop()
         print("gpio cleanup...")
         GPIO.cleanup()
     
