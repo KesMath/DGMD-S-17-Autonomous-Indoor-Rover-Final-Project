@@ -73,7 +73,7 @@ class MotorDriver:
 
     def move_forward_1_foot(self) -> None:
         while True:
-            __move_rover_forward()
+            self.__move_rover_forward()
             time.sleep(MILLESECOND_DELAY_FOR_1_FOOT_TRAVEL * 1000)
             break
 
