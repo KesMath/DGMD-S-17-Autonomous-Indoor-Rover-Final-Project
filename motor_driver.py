@@ -20,7 +20,7 @@ FREQUENCY: Final[int] = 100 # is the number of times per second that a pulse is 
 DUTY_CYLCE: Final[int] = 50 # is the percentage of time between pulses that the signal is “high” or “On”.
 
 ####### WARNING!! - VALUE HERE IS DEPENDENT ON FREQ=100/DUTY_CYCLE=50 #######
-MILLESECOND_DELAY_FOR_1_FOOT_TRAVEL: Final[float] = 0.00125 # experimentally timed milleseconds needed for rover to travel 1 foot
+MILLESECOND_DELAY_FOR_1_FOOT_TRAVEL: Final[float] = 0.00167 # experimentally timed milleseconds needed for rover to travel 1 foot
 
 class MotorDriver:
     def __init__(self):
@@ -81,7 +81,6 @@ class MotorDriver:
             self.__move_rover_forward()
             time.sleep(MILLESECOND_DELAY_FOR_1_FOOT_TRAVEL * 1000)
             break
-
         self.stop_pwm_on_both_motors()
 
     def move_backward_1_foot(self) -> None:
