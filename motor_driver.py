@@ -39,26 +39,26 @@ class MotorDriver:
         self.p1.start(DUTY_CYLCE) # 50% power for motor 1
         self.p2.start(DUTY_CYLCE) # 50% power for motor 2
 
-        def get_motor1():
-            return self.p1
+    def get_motor1():
+        return self.p1
 
-        def get_motor2():
-            return self.p2
+    def get_motor2():
+        return self.p2
         
-        # Refer to table here for HIGH/LOW combinations <-> movement: https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/
-        def move_rover_forward(self) -> None:
-            GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.HIGH)
-            GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.LOW)
+    # Refer to table here for HIGH/LOW combinations <-> movement: https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/
+    def move_rover_forward(self) -> None:
+        GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.HIGH)
+        GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.LOW)
 
-            GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.HIGH)
-            GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.LOW)
+        GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.HIGH)
+        GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.LOW)
 
-        def move_rover_backward(self) -> None:
-            GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.LOW)
-            GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.HIGH)
+    def move_rover_backward(self) -> None:
+        GPIO.output(INPUT_PIN_1_MOTOR_A, GPIO.LOW)
+        GPIO.output(INPUT_PIN_2_MOTOR_A, GPIO.HIGH)
 
-            GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.LOW)
-            GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.HIGH)
+        GPIO.output(INPUT_PIN_3_MOTOR_B, GPIO.LOW)
+        GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.HIGH)
 
 
 
