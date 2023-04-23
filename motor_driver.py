@@ -16,6 +16,11 @@ INPUT_PIN_4_MOTOR_B: Final[int] = 18
 MOTOR_A_SPEED_ENABLE: Final[int] = 15
 MOTOR_B_SPEED_ENABLE: Final[int] = 22
 
+# Pins for Encoder Reading
+MOTOR_ENCODER_LEFT: Final[int] = 35
+MOTOR_ENCODER_RIGHT: Final[int] = 37
+
+
 FREQUENCY: Final[int] = 100 # is the number of times per second that a pulse is generated.
 DUTY_CYLCE: Final[int] = 50 # is the percentage of time between pulses that the signal is “high” or “On”.
 
@@ -35,6 +40,9 @@ class MotorDriver:
         GPIO.setup(INPUT_PIN_4_MOTOR_B, GPIO.OUT)
         GPIO.setup(MOTOR_A_SPEED_ENABLE, GPIO.OUT)
         GPIO.setup(MOTOR_B_SPEED_ENABLE, GPIO.OUT)
+
+        GPIO.setup(MOTOR_ENCODER_LEFT, GPIO.IN)
+        GPIO.setup(MOTOR_ENCODER_RIGHT, GPIO.IN)        
 
         # Reference on Pulse Width Modulation (PWM): https://raspi.tv/2013/rpi-gpio-0-5-2a-now-has-software-pwm-how-to-use-it
         self.p1 = GPIO.PWM(MOTOR_A_SPEED_ENABLE, FREQUENCY)
@@ -76,16 +84,20 @@ class MotorDriver:
         GPIO.output(INPUT_PIN_4_MOTOR_B, GPIO.HIGH)
     
     def pivot_left_90_deg(self) -> None:
-        pass
+        # turn left until number of ticks reached
+        while True:
+            self.rotate_left()
+            break
+        self.stop_pwm_on_both_motors()
 
     def pivot_right_90_deg(self) -> None:
         pass
 
 
     def move_forward_1_foot(self) -> None:
+        # move fwd until number of ticks reached
         while True:
             self.__move_rover_forward()
-            time.sleep(MILLESECOND_DELAY_FOR_1_FOOT_TRAVEL * 1000)
             break
         self.stop_pwm_on_both_motors()
 
@@ -100,10 +112,36 @@ class MotorDriver:
 
 
 def main():
-    motor = MotorDriver()
-    #motor.move_forward_1_foot()
-    motor.rotate_left()
-    GPIO.cleanup()
+#######################
+# ENCODER
+    GPIO.setup(MOTOR_ENCODER_LEFT, GPIO.IN)
+    GPIO.setup(MOTOR_ENCODER_RIGHT, GPIO.IN)
+
+    # reads initial state of encoder pin   
+    init = GPIO.input(MOTOR_ENCODER_LEFT)
+    cout = 0
+    try:
+        while True:
+            # a pulse change has occurred if value discrepancy occurred
+            if GPIO.input(MOTOR_ENCODER_LEFT) != init:
+                cout +=1
+                print("position : " + cout)
+
+    except KeyboardInterrupt:
+        print("keyboard interupt detected...")
+        pass
+    finally:
+        print("gpio cleanup...")
+        GPIO.cleanup()
+
+###################################
+# ROTATION
+    #motor = MotorDriver()
+    #motor.rotate_left()
+    #GPIO.cleanup()
+
+###################################
+# GENERAL DRIVE TEST
     # try:
     #     while True:
     #         m.move_rover_forward()
