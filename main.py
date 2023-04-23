@@ -4,6 +4,8 @@
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
 import pigpio
+import math
+from viam.components.base import Base
 
 WORKING_FREQUENCY = 1000
 Forward_multiplier = 1.2
@@ -11,7 +13,7 @@ Turn_multiplier = 1.2
 
 
 class MotorController:
-    def __init__(self):
+    def __init__(self, encoder):
         self.controller = pigpio.pi()
         #put terminals here
         self.lastPWM1 = 0
@@ -23,9 +25,13 @@ class MotorController:
         self.controller.write()
         self.controller.write()
         self.controller.write()
+        # self.encoder = encoder
         #replace 0 entry of hardware_PWM to pins being utilized.
         self.controller.hardware_PWM(13, WORKING_FREQUENCY, 0)
         self.controller.hardware_PWM(12, WORKING_FREQUENCY, 0)
+
+        self.curr_angle =0
+        self.curr_pos = [0,0]
 
     def forward(self):
         if(not self.moving_forward):
@@ -131,11 +137,82 @@ class MotorController:
         self.controller.write()
         self.controller.write()
         self.controller.stop()
-        
+
+    def move_straight_distance(self, dist):
+        #CALL FORWARD
+        #conv = ticks per unit
+        #dist = unit * conv
+        #ticks = self.encoder.GetTicks()
+        curr_pos = self.encoder.GetPosition()
+        final_pos = curr_pos + dist
+        # final_ticks = dist_ticks + ticks
+        #self.controller.forward()
+
+        while curr_pos < final_pos:
+            curr_pos = self.encoder.GetPosition()
+
+        #while ticks < final_ticks:
+            #ticks = self.encoder.GetTicks()
+            #time.sleep(0.0001)
+        #STOP
+
+        #self.controller.shutdown()
+
+    def move_spin_distance(self, angle, dist):
+        # x_dist = x_goal - x_start
+        # y_dist = y_goal - y_start
+
+        start_angle = self.curr_angle
+        final_angle = angle + start_angle
+        curr_pos = self.encoder.GetPosition()
+        final_pos = curr_pos + dist
+
+        while curr_angle < final_angle:
+            curr_pos = self.encoder.GetPosition()
+            x_dist = final_pos[0] - curr_pos[0]
+            y_dist = final_pos[1] - curr_pos[1]
+            curr_angle = math.atan(y_dist/x_dist)
+
+        self.curr_angle = final_angle
+        return angle
+
+    def move_towards_goal(self, goal):
+        # whats my curr angle
+        # whats the desired angle
+        # move spin distance
+        self.move_spin_distance()
+        # move straight distance
+        self.move_straight_distance()
+
+
+
+
+class Encoder:
+    def __init__(self, robot):
+        self.en = Encoder.from_robot(robot, "Encoder")
+        return self.en
+        # pi = pigpio.pi()
+        # pi.set_mode(35, pigpio.INPUT)
+        # pi.set_mode(37, pigpio.INPUT)
+        # self.pin1 = pin1
+        # self.pin2 = pin2
+
+
+    def GetPosition(self):
+        return await self.en.get_position()
+        # return self.pi.read(35)
+        # return self.pi.read(37)
+        #return self.pin1 #logic
+
 
 if __name__ == "__main__":
+    #connect code in main
+    robot = await connect()
+    encoder = Encoder(robot) #pins
+    encoder.GetPosition()
+    encoder.en.get_position()
     import time
-    Controller = MotorController()
+    Controller = MotorController(encoder)
     Controller.forward()
     time.sleep(1)
     Controller.turn_left()
@@ -144,6 +221,13 @@ if __name__ == "__main__":
     time.sleep(5)
     Controller.stop()
 
+
+'''
+ENCODER WORKFLOW
+Detect distance to target
+Convert distance to ticks
+Go in direction for x amount of ticks
+'''
 
 
 
