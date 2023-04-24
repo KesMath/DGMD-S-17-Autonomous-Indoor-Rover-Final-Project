@@ -26,7 +26,7 @@ async def moveInSquare(base):
 
 async def move_forward_1_foot(base):
     # moves the Viam Rover forward (304.8mm/ 1 ft) at 500mm/s
-    await base.move_straight(velocity=500, distance=304.8)
+    await base.move_straight(velocity=500, distance=305)
     print("move straight")
 
 
