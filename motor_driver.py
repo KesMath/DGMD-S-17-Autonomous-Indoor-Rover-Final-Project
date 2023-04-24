@@ -16,20 +16,22 @@ async def connect():
     return await RobotClient.at_address('kes-rover-main.0ltqp6fjer.viam.cloud', opts)
 
 async def move_forward_1_foot(base):
-    # moves the Viam Rover forward 625mm at 625mm/s
+    # Moves the Viam Rover forward 625mm at 625mm/s
     await base.move_straight(velocity=625, distance=625)
     print("move straight")
 
 
 async def spin_left_90_degrees(base):
-    # spins the Viam Rover 90 degrees at 100 degrees per second
-    await base.spin(velocity=100, angle=90)
-    print("spin 90 degrees")
+    # Spins the Viam Rover 90 degrees at 100 degrees per second
+    # Experimentally, I had to reduce by 10 degrees since 90 deg was overshot
+    await base.spin(velocity=100, angle=80)
+    print("spin left 90 degrees")
 
 async def spin_right_90_degrees(base):
-    # spins the Viam Rover 90 degrees at 100 degrees per second
-    await base.spin(velocity=100, angle=90)
-    print("spin 90 degrees")
+    # Spins the Viam Rover 90 degrees at 100 degrees per second
+    # Experimentally, I had to reduce by 10 degrees since 90 deg was overshot
+    await base.spin(velocity=100, angle=-80)
+    print("spin right 90 degrees")
 
 async def main():
     robot = await connect()
