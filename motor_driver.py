@@ -1,5 +1,5 @@
+import time
 import asyncio
-
 from viam.robot.client import RobotClient
 from viam.rpc.dial import Credentials, DialOptions
 from viam.components.base import Base
@@ -34,13 +34,17 @@ async def spin_right_90_degrees(base):
 
 async def drive_right_1_foot(base):
     await spin_right_90_degrees(base)
+    time.sleep(1)
     await move_forward_1_foot(base)
+    time.sleep(1)
     # re-centers rover forward
     await spin_left_90_degrees(base)
 
 async def drive_left_1_foot(base):
     await spin_left_90_degrees(base)
+    time.sleep(1)
     await move_forward_1_foot(base)
+    time.sleep(1)
     # re-centers rover forward
     await spin_right_90_degrees(base)
 
