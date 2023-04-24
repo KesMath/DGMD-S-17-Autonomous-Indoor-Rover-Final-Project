@@ -20,7 +20,6 @@ async def move_forward_1_foot(base):
     await base.move_straight(velocity=625, distance=625)
     print("move straight")
 
-
 async def spin_left_90_degrees(base):
     # Spins the Viam Rover 90 degrees at 100 degrees per second
     # Experimentally, I had to reduce by 10 degrees since 90 deg was overshot
@@ -33,18 +32,27 @@ async def spin_right_90_degrees(base):
     await base.spin(velocity=100, angle=-80)
     print("spin right 90 degrees")
 
+async def drive_right_1_foot(base):
+    await spin_right_90_degrees(base)
+    await move_forward_1_foot(base)
+    # re-centers rover forward
+    await spin_left_90_degrees(base)
+
+async def drive_left_1_foot(base):
+    await spin_left_90_degrees(base)
+    await move_forward_1_foot(base)
+    # re-centers rover forward
+    await spin_right_90_degrees(base)
+
 async def main():
     robot = await connect()
-
-    #print('Resources:')
-    #print(robot.resource_names)
     
     # Get the base component from the Viam Rover
     roverBase = Base.from_robot(robot, 'viam_base')
 
-    await move_forward_1_foot(roverBase)
+    await drive_left_1_foot(roverBase)
 
-    # Don't forget to close the robot when you're done!
+    # close server connection
     await robot.close()
 
 if __name__ == '__main__':
