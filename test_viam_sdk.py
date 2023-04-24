@@ -36,6 +36,7 @@ async def main():
     # Move the Viam Rover in a square
     await moveInSquare(roverBase)
 
+
     # Don't forget to close the robot when you're done!
     await robot.close()
 
