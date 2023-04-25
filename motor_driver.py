@@ -77,8 +77,7 @@ async def main():
 
     ############# TODO: fix import issue ######################
     #shortest_path = return_shortest_path(start_point = start_point, goal_point = (0,4), width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
-    #shortest_path.pop()
-
+    #del shortest_path[0]
     # for node in shortest_path:
     #     next_point = node.get_coordinate_pt()
     #     print("driving to :" + next_point)
@@ -92,13 +91,13 @@ async def main():
 
     ############# NOTE: due to import issue above and time constraints, need to mock shortest path for DEMO purposes ######################
     shortest_path = [(4,0), (4,1), (4,2), (4,3), (4,4), (3,4), (2,4), (1,4), (0,4)]
-    shortest_path.pop()
+    del shortest_path[0]
 
     for point in shortest_path:
         next_point = point
         print("driving to :" + str(next_point))
         await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
-        time.sleep(7)
+        time.sleep(5)
         # need to update starting point since robot moved to a new position
         start_point = next_point
     
