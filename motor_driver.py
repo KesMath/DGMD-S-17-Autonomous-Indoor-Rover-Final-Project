@@ -73,7 +73,7 @@ async def main():
     # Get the base component from the Viam Rover
     roverBase = Base.from_robot(robot, 'viam_base')
 
-    #TODO: fix import issue
+    ############# TODO: fix import issue ######################
     #shortest_path = return_shortest_path(start_point = start_point, goal_point = (0,4), width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
 
     # for node in shortest_path:
@@ -84,6 +84,10 @@ async def main():
     #     # need to update starting point since robot moved to a new position
     #     start_point = next_point
 
+    ##########################################################
+
+
+    ############# NOTE: due to import issue above and time constraints, need to mock shortest path for DEMO purposes ######################
     shortest_path = [(4,0), (4,1), (4,2), (4,3), (4,4), (3,4), (2,4), (1,4), (0,4)]
     for point in shortest_path:
         next_point = point
