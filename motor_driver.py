@@ -93,7 +93,7 @@ async def main():
     for point in shortest_path:
         next_point = point
         print("driving to :" + str(next_point))
-        await drive_to_next_tile(base = robot, current_point = start_point, new_coordinate_pt = next_point)
+        await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
         time.sleep(4)
         # need to update starting point since robot moved to a new position
         start_point = next_point
