@@ -1,8 +1,9 @@
 import time
 import asyncio
+
+from viam.components.base import Base
 from viam.robot.client import RobotClient
 from viam.rpc.dial import Credentials, DialOptions
-from viam.components.base import Base
 
 #from path_planning import *
 
@@ -93,7 +94,7 @@ async def main():
         next_point = point
         print("driving to :" + str(next_point))
         await drive_to_next_tile(base = robot, current_point = start_point, new_coordinate_pt = next_point)
-        time.sleep(2)
+        time.sleep(4)
         # need to update starting point since robot moved to a new position
         start_point = next_point
     
