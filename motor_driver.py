@@ -51,17 +51,18 @@ async def drive_left_1_foot(base):
     await spin_right_90_degrees(base)
 
 async def drive_to_next_tile(base, current_point: tuple, new_coordinate_pt: tuple):
+    # drive forward
+    if new_coordinate_pt[0] < current_point[0] and new_coordinate_pt[1] == current_point[1]:
+        await move_forward_1_foot(base)
+
     # drive to left tile
-    if new_coordinate_pt[0] < current_point[0]:
+    elif new_coordinate_pt[0] < current_point[0]:
         await drive_left_1_foot(base)
 
     # drive to right tile
     elif new_coordinate_pt[1] > current_point[1]:
         await drive_right_1_foot(base)
-    
-    # drive forward
-    elif new_coordinate_pt[0] < current_point[0]:
-        await move_forward_1_foot(base)
+   
     
     # TODO: add remaining cases
     # drive backward
