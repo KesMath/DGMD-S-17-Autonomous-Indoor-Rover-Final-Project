@@ -22,7 +22,7 @@ Simultaneous Localization and Mapping or SLAM is concerned with the objective of
 From a mapping perspective, using LiDAR to establish a point cloud of all neighboring objects at a fixed distance sounds intuitive enough but that alone doesn’t touch on the topic of localization. Fortunately, LiDAR-Based SLAM can be interfaced with wheel odometry, which measures distance traveled at the wheel, along with accelerometers & gyroscope sensors to mathematically model its location based on initial starting conditions. With its environment mapped out, the final step to reach a level of autonomy has to deal with path planning. There are a number of path planning algorithms (e.g. Dijkstra, A* Search, & Rapidly Exploring Random Tree) that essentially try to solve the same task: to find the shortest path in the form of a continuous sequence of non-blocking points that leads to its goal destination while avoiding points along that path that are deemed or marked as obstacles. Taken in conjunction, we get an overview of how autonomous navigation can generally be achieved - perception through SLAM coupled with classical shortest path algorithms.
 
 ## Minimum Viable Product
-Run Command to Drive Rover
+### *Run Command to Drive Rover*: `python motor_driver.py`
 ```
 pi@headlesspi:~/DGMD-E-17-Autonomous-Indoor-Rover-Final-Project $ python motor_driver.py
 2023-04-24 21:56:25,416		INFO	viam.rpc.dial (dial.py:209)	Connecting to socket: /tmp/proxy-KqmhUfy3.sock
@@ -52,6 +52,15 @@ driving to :(0, 4)
 move straight
 ```
 
-## had some issues with importing path planner but running unit tests indeed proves it's working
+### *Path Planner Results*
+*Note: There were some import issues PathPlanner module. As such, for the sake of time, the `motor_driver.py` file used a hardcoded list of coordinate points to simulate the shortest path. Fortunately, this can be quickly remediated and showing the unit tests below indeed proves it's fully functioning!*
+```
+Kess-MBP:autonomous_rover_project keslermathieu$ python3 path_planning/test_dijkstra_path_planner.py
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 12.282s
 
+OK
+Kess-MBP:autonomous_rover_project keslermathieu$ 
+```
 
