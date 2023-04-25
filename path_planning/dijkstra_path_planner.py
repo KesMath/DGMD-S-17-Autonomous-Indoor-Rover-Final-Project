@@ -5,6 +5,9 @@ from sortedcontainers import SortedKeyList
 STEP_COST = 1 # cost incurred when moving to a adjacent cell. We assume each grid cell has a side length of 1
 FREE_SPACE = 0
 OBSTACLES = 1
+GRID_WIDTH = 5
+GRID_HEIGHT = 5
+
 
 def is_within_grid_bounds(n: int, boundary: int) -> bool:
     return n >= 0 and n < boundary  
