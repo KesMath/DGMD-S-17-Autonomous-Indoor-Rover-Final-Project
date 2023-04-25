@@ -4,9 +4,8 @@ from viam.robot.client import RobotClient
 from viam.rpc.dial import Credentials, DialOptions
 from viam.components.base import Base
 
-from path_planning import grid_maps
-from path_planning import node
-from path_planning import dijkstra_path_planner
+from path_planning.dijkstra_path_planner import *
+from path_planning.grid_maps import *
 
 async def connect():
     creds = Credentials(
