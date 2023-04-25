@@ -4,8 +4,7 @@ from viam.robot.client import RobotClient
 from viam.rpc.dial import Credentials, DialOptions
 from viam.components.base import Base
 
-from path_planning.dijkstra_path_planner import *
-from path_planning.grid_maps import *
+#from path_planning import *
 
 async def connect():
     creds = Credentials(
@@ -73,10 +72,21 @@ async def main():
     start_point = (4,0)
     # Get the base component from the Viam Rover
     roverBase = Base.from_robot(robot, 'viam_base')
-    shortest_path = return_shortest_path(start_point = start_point, goal_point = (0,4), width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
 
-    for node in shortest_path:
-        next_point = node.get_coordinate_pt()
+    #TODO: fix import issue
+    #shortest_path = return_shortest_path(start_point = start_point, goal_point = (0,4), width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
+
+    # for node in shortest_path:
+    #     next_point = node.get_coordinate_pt()
+    #     print("driving to :" + next_point)
+    #     await drive_to_next_tile(base = robot, current_point = start_point, new_coordinate_pt = next_point)
+    #     time.sleep(2)
+    #     # need to update starting point since robot moved to a new position
+    #     start_point = next_point
+
+    shortest_path = [(4,0), (4,1), (4,2), (4,3), (4,4), (3,4), (2,4), (1,4), (0,4)]
+    for point in shortest_path:
+        next_point = point
         print("driving to :" + next_point)
         await drive_to_next_tile(base = robot, current_point = start_point, new_coordinate_pt = next_point)
         time.sleep(2)
