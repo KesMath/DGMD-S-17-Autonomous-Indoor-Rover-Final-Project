@@ -21,4 +21,37 @@ Autonomous navigation is not a trivial feat given that a machine must skillfully
 Simultaneous Localization and Mapping or SLAM is concerned with the objective of creating a map of an unknown environment while the rover must simultaneously ascertain its location in that space. In order for SLAM to work, it requires as input a set of distance points from the rover to a nearby object. There are a number of physical sensors that can accomplish this task but one common approach is to leverage a LiDAR sensor. A LiDAR sensor essentially works by shooting a beam of light from an internal emitter to an outbound target. The light beam returns to the LiDAR assembly, specifically the receiver, and its elapsed time is measured. Using the distance formula, we can intuitively calculate the distance from the assembly to an outbound target. LiDAR is an excellent choice for SLAM algorithms to generate a high fidelity map as certain models can sample the environment as much as 8,000 times per second!
 From a mapping perspective, using LiDAR to establish a point cloud of all neighboring objects at a fixed distance sounds intuitive enough but that alone doesn’t touch on the topic of localization. Fortunately, LiDAR-Based SLAM can be interfaced with wheel odometry, which measures distance traveled at the wheel, along with accelerometers & gyroscope sensors to mathematically model its location based on initial starting conditions. With its environment mapped out, the final step to reach a level of autonomy has to deal with path planning. There are a number of path planning algorithms (e.g. Dijkstra, A* Search, & Rapidly Exploring Random Tree) that essentially try to solve the same task: to find the shortest path in the form of a continuous sequence of non-blocking points that leads to its goal destination while avoiding points along that path that are deemed or marked as obstacles. Taken in conjunction, we get an overview of how autonomous navigation can generally be achieved - perception through SLAM coupled with classical shortest path algorithms.
 
+## Minimum Viable Product
+Run Command to Drive Rover
+```
+pi@headlesspi:~/DGMD-E-17-Autonomous-Indoor-Rover-Final-Project $ python motor_driver.py
+2023-04-24 21:56:25,416		INFO	viam.rpc.dial (dial.py:209)	Connecting to socket: /tmp/proxy-KqmhUfy3.sock
+driving to :(4, 1)
+spin right 90 degrees
+move straight
+spin left 90 degrees
+driving to :(4, 2)
+spin right 90 degrees
+move straight
+spin left 90 degrees
+driving to :(4, 3)
+spin right 90 degrees
+move straight
+spin left 90 degrees
+driving to :(4, 4)
+spin right 90 degrees
+move straight
+spin left 90 degrees
+driving to :(3, 4)
+move straight
+driving to :(2, 4)
+move straight
+driving to :(1, 4)
+move straight
+driving to :(0, 4)
+move straight
+```
+
+## had some issues with importing path planner but running unit tests indeed proves it's working
+
 
