@@ -76,7 +76,7 @@ async def main():
 
     ############# TODO: fix import issue ######################
     #shortest_path = return_shortest_path(start_point = start_point, goal_point = (0,4), width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
-    #shortest_path.remove(0)
+    #shortest_path.pop()
 
     # for node in shortest_path:
     #     next_point = node.get_coordinate_pt()
@@ -91,7 +91,7 @@ async def main():
 
     ############# NOTE: due to import issue above and time constraints, need to mock shortest path for DEMO purposes ######################
     shortest_path = [(4,0), (4,1), (4,2), (4,3), (4,4), (3,4), (2,4), (1,4), (0,4)]
-    shortest_path.remove(0)
+    shortest_path.pop()
 
     for point in shortest_path:
         next_point = point
