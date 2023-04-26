@@ -51,6 +51,7 @@ async def drive_left_1_foot(base):
     await spin_right_90_degrees(base)
 
 async def drive_to_next_tile(base, current_point: tuple, new_coordinate_pt: tuple):
+    # FIXME!
     # drive forward
     if new_coordinate_pt[0] < current_point[0] and new_coordinate_pt[1] == current_point[1]:
         await move_forward_1_foot(base)
