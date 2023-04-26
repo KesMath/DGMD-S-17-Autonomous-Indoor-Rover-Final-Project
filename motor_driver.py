@@ -71,39 +71,47 @@ async def drive_to_next_tile(base, current_point: tuple, new_coordinate_pt: tupl
     # stay put!
 
 async def main():
+    print("connecting to robot...")
     robot = await connect()
     start_point = (4,0)
     # Get the base component from the Viam Rover
     roverBase = Base.from_robot(robot, 'viam_base')
 
     ############# TODO: fix import issue ######################
-    #shortest_path = return_shortest_path(start_point = start_point, goal_point = (0,4), width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
-    #del shortest_path[0]
-    # for node in shortest_path:
-    #     next_point = node.get_coordinate_pt()
-    #     print("driving to :" + next_point)
-    #     await drive_to_next_tile(base = robot, current_point = start_point, new_coordinate_pt = next_point)
-    #     time.sleep(2)
-    #     # need to update starting point since robot moved to a new position
-    #     start_point = next_point
+    # shortest_path = return_shortest_path(start_point = start_point, goal_point = (0,4), width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
+    # del shortest_path[0] # remove current point
 
+    # if shortest_path is not None:
+    #     for node in shortest_path:
+    #         next_point = node.get_coordinate_pt()
+    #         print("driving to :" + next_point)
+    #         await drive_to_next_tile(base = robot, current_point = start_point, new_coordinate_pt = next_point)
+    #         time.sleep(2)
+    #         # need to update starting point since robot moved to a new position
+    #         start_point = next_point
+    # else:
+    #     print("Rover unable to find shortest path... ")
     ##########################################################
 
 
     ############# NOTE: due to import issue above and time constraints, need to mock shortest path for DEMO purposes ######################
     shortest_path = [(4,0), (4,1), (4,2), (4,3), (4,4), (3,4), (2,4), (1,4), (0,4)]
-    del shortest_path[0]
+    del shortest_path[0] # remove current point
 
-    for point in shortest_path:
-        next_point = point
-        print("driving to :" + str(next_point))
-        await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
-        time.sleep(5)
-        # need to update starting point since robot moved to a new position
-        start_point = next_point
+    if shortest_path is not None:
+        for point in shortest_path:
+            next_point = point
+            print("driving to :" + str(next_point))
+            await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
+            time.sleep(5)
+            # need to update starting point since robot moved to a new position
+            start_point = next_point
     
+    else:
+        print("Rover unable to find shortest path... ")
 
     # close server connection
+    print("closing connection to robot...")
     await robot.close()
 
 if __name__ == '__main__':
