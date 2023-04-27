@@ -25,7 +25,7 @@ async def move_forward_1_foot(base):
 async def move_backward_1_foot(base):
     # Moves the Viam Rover backward 625mm at 625mm/s
     print("moving backward")
-    await base.move_straight(velocity=-625, distance=625)
+    await base.move_straight(velocity=-625, distance=515)
 
 async def spin_left_90_degrees(base):
     # Spins the Viam Rover 90 degrees at 100 degrees per second
