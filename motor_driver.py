@@ -79,7 +79,7 @@ async def main():
     # Get the base component from the Viam Rover
     roverBase = Base.from_robot(robot, 'viam_base')
 
-    move_backward_1_foot(roverBase)
+    await move_backward_1_foot(roverBase)
 
     ############# TODO: fix import issue ######################
     # shortest_path = return_shortest_path(start_point = start_point, goal_point = (0,4), width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
