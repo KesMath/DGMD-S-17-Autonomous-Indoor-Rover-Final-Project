@@ -1,7 +1,8 @@
 import time
 import asyncio
 
-from path_planning import *
+from path_planning.dijkstra_path_planner import *
+from path_planning.grid_maps import *
 from viam.components.base import Base
 from viam.robot.client import RobotClient
 from viam.rpc.dial import Credentials, DialOptions
@@ -75,12 +76,14 @@ async def main():
     print("connecting to robot...")
     robot = await connect()
     start_point = (4,0)
+    
     # Get the base component from the Viam Rover
     roverBase = Base.from_robot(robot, 'viam_base')
 
     ############# TODO: fix import issue ######################
+    print("calculating shortest path...")
     shortest_path = return_shortest_path(start_point = start_point, goal_point = (0,4), width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
-    print(shortest_path)
+    
     del shortest_path[0] # remove current point
 
     if shortest_path is not None:
