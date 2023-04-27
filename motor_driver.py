@@ -1,11 +1,10 @@
 import time
 import asyncio
 
+from path_planning import *
 from viam.components.base import Base
 from viam.robot.client import RobotClient
 from viam.rpc.dial import Credentials, DialOptions
-
-#from path_planning import *
 
 async def connect():
     creds = Credentials(
@@ -80,37 +79,38 @@ async def main():
     roverBase = Base.from_robot(robot, 'viam_base')
 
     ############# TODO: fix import issue ######################
-    # shortest_path = return_shortest_path(start_point = start_point, goal_point = (0,4), width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
-    # del shortest_path[0] # remove current point
+    shortest_path = return_shortest_path(start_point = start_point, goal_point = (0,4), width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
+    print(shortest_path)
+    del shortest_path[0] # remove current point
 
-    # if shortest_path is not None:
-    #     for node in shortest_path:
-    #         next_point = node.get_coordinate_pt()
-    #         print("driving to :" + next_point)
-    #         await drive_to_next_tile(base = robot, current_point = start_point, new_coordinate_pt = next_point)
-    #         time.sleep(2)
-    #         # need to update starting point since robot moved to a new position
-    #         start_point = next_point
-    # else:
-    #     print("Rover unable to find shortest path... ")
+    if shortest_path is not None:
+        for node in shortest_path:
+            next_point = node.get_coordinate_pt()
+            print("driving to :" + next_point)
+            await drive_to_next_tile(base = robot, current_point = start_point, new_coordinate_pt = next_point)
+            time.sleep(2)
+            # need to update starting point since robot moved to a new position
+            start_point = next_point
+    else:
+        print("Rover unable to find shortest path... ")
     ##########################################################
 
 
     ############# NOTE: due to import issue above and time constraints, need to mock shortest path for DEMO purposes ######################
-    shortest_path = [(4,0), (4,1), (4,2), (4,3), (4,4), (3,4), (2,4), (1,4), (0,4)]
-    del shortest_path[0] # remove current point
+    # shortest_path = [(4,0), (4,1), (4,2), (4,3), (4,4), (3,4), (2,4), (1,4), (0,4)]
+    # del shortest_path[0] # remove current point
 
-    if shortest_path is not None:
-        for point in shortest_path:
-            next_point = point
-            print("driving to :" + str(next_point))
-            await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
-            time.sleep(3)
-            # need to update starting point since robot moved to a new position
-            start_point = next_point
+    # if shortest_path is not None:
+    #     for point in shortest_path:
+    #         next_point = point
+    #         print("driving to :" + str(next_point))
+    #         await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
+    #         time.sleep(3)
+    #         # need to update starting point since robot moved to a new position
+    #         start_point = next_point
     
-    else:
-        print("Rover unable to find shortest path... ")
+    # else:
+    #     print("Rover unable to find shortest path... ")
 
     # close server connection
     print("closing connection to robot...")
