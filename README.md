@@ -53,11 +53,11 @@ moving straight
 driving to :(0, 4)
 moving straight
 closing client connection to Viam server...
-
-### PathPlanner Results: `python3 path_planning/test_dijkstra_path_planner.py`
 ```
-Kess-MBP:autonomous_rover_project keslermathieu$ python3 path_planning/test_dijkstra_path_planner.py
-.............
+### PathPlanner Results: `python3 path_planning/test_dijkstra_path_planner.py`
+
+```
+Kess-MBP:autonomous_rover_project keslermathieu$ python3 path_planning test_dijkstra_path_planner.py
 ----------------------------------------------------------------------
 Ran 13 tests in 12.282s
 
