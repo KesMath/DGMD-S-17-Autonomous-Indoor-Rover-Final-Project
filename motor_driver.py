@@ -73,13 +73,13 @@ async def drive_to_next_tile(base, current_point: tuple, new_coordinate_pt: tupl
         await move_backward_1_foot(base)
 
 async def main():
-    print("connecting to robot...")
-    robot = await connect()
+    print("connecting rover to Viam server...")
+    robot_client = await connect()
     start_point = (4,0)
     goal_point = (0,4)
     
     # Get the base component from the Viam Rover
-    roverBase = Base.from_robot(robot, 'viam_base')
+    roverBase = Base.from_robot(robot_client, 'viam_base')
 
     ############# TODO: fix import issue ######################
     print("calculating shortest path...")
@@ -117,8 +117,8 @@ async def main():
     #     print("Rover unable to find shortest path... ")
 
     # close server connection
-    print("closing connection to robot...")
-    await robot.close()
+    print("closing client connection to Viam server...")
+    await robot_client.close()
 
 if __name__ == '__main__':
     asyncio.run(main())
