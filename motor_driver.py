@@ -19,25 +19,25 @@ async def connect():
 
 async def move_forward_1_foot(base):
     # Moves the Viam Rover forward 625mm at 625mm/s
+    print("moving straight")
     await base.move_straight(velocity=625, distance=625)
-    print("move straight")
 
 async def move_backward_1_foot(base):
     # Moves the Viam Rover backward 625mm at 625mm/s
+    print("moving backward")
     await base.move_straight(velocity=-625, distance=625)
-    print("move straight")
 
 async def spin_left_90_degrees(base):
     # Spins the Viam Rover 90 degrees at 100 degrees per second
     # Experimentally, I had to reduce by 10 degrees since 90 deg was overshot
+    print("spinning left 90 degrees")
     await base.spin(velocity=100, angle=80)
-    print("spin left 90 degrees")
 
 async def spin_right_90_degrees(base):
     # Spins the Viam Rover 90 degrees at 100 degrees per second
     # Experimentally, I had to reduce by 10 degrees since 90 deg was overshot
+    print("spinning right 90 degrees")
     await base.spin(velocity=100, angle=-80)
-    print("spin right 90 degrees")
 
 async def drive_right_1_foot(base):
     await spin_right_90_degrees(base)
