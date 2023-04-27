@@ -92,7 +92,7 @@ async def main():
             next_point = node.get_coordinate_pt()
             print("driving to :" + str(next_point))
             await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
-            time.sleep(2)
+            time.sleep(1)
             # need to update starting point since robot moved to a new position
             start_point = next_point
     else:
