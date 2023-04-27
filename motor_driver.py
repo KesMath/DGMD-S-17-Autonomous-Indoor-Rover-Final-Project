@@ -75,7 +75,10 @@ async def drive_to_next_tile(base, current_point: tuple, new_coordinate_pt: tupl
 async def main():
     print("connecting rover to Viam server...")
     robot_client = await connect()
+    
+    # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
     start_point = (4,0)
+    # TODO: pass via CLI input
     goal_point = (0,4)
     
     # Get the base component from the Viam Rover
