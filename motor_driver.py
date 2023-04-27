@@ -81,7 +81,7 @@ async def main():
     # Get the base component from the Viam Rover
     roverBase = Base.from_robot(robot_client, 'viam_base')
 
-    ############# TODO: fix import issue ######################
+
     print("calculating shortest path...")
     shortest_path = return_shortest_path(start_point = start_point, goal_point = goal_point, width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
 
