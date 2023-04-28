@@ -83,7 +83,7 @@ async def main():
         goal_point = input("Enter the goal point as x,y: ")
         goal_point = goal_point.split()
     
-    goal_point = (goal_point[0] , goal_point[1])
+    goal_point = (int(goal_point[0]) , int(goal_point[1]))
 
     print("connecting rover to Viam server...")
     robot_client = await connect()
