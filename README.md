@@ -25,8 +25,9 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 ### Run Command to Drive Rover: `python motor_driver.py`
 ```
 pi@headlesspi:~/DGMD-S-17-Autonomous-Indoor-Rover-Final-Project $ python motor_driver.py
+Enter the goal point as x y: 0 4
 connecting rover to Viam server...
-2023-04-27 19:38:30,446		INFO	viam.rpc.dial (dial.py:209)	Connecting to socket: /tmp/proxy-grwzpCYD.sock
+2023-04-27 22:31:55,166		INFO	viam.rpc.dial (dial.py:209)	Connecting to socket: /tmp/proxy-64D4HUGj.sock
 calculating shortest path...
 driving to :(4, 1)
 spinning right 90 degrees
