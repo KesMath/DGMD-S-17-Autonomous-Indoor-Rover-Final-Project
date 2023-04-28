@@ -73,14 +73,21 @@ async def drive_to_next_tile(base, current_point: tuple, new_coordinate_pt: tupl
         await move_backward_1_foot(base)
 
 async def main():
-    print("connecting rover to Viam server...")
-    robot_client = await connect()
-    
     # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
     start_point = (4,0)
-    # TODO: pass via CLI input
-    goal_point = (0,4)
+
+    goal_point = input("Enter the goal point as x y: ")
+    goal_point = goal_point.split()
+    while(not is_within_grid_bounds(int(goal_point[0]), GRID_WIDTH) and not is_within_grid_bounds(int(goal_point[1]), GRID_HEIGHT)): #ensure bounds check
+        print("X must be >=0 and less than " +  str(GRID_WIDTH) + " and Y must be >= 0 and less than " + str(GRID_HEIGHT))
+        goal_point = input("Enter the goal point as x,y: ")
+        goal_point = goal_point.split()
     
+    goal_point = (goal_point[0] , goal_point[1])
+
+    print("connecting rover to Viam server...")
+    robot_client = await connect()
+
     # Get the base component from the Viam Rover
     roverBase = Base.from_robot(robot_client, 'viam_base')
 
