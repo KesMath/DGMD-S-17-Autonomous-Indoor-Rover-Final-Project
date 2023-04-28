@@ -78,7 +78,7 @@ async def main():
 
     goal_point = input("Enter the goal point as x y: ")
     goal_point = goal_point.split()
-    while(not is_within_grid_bounds(int(goal_point[0]), GRID_WIDTH) and not is_within_grid_bounds(int(goal_point[1]), GRID_HEIGHT)): #ensure bounds check
+    while(not (is_within_grid_bounds(int(goal_point[0]), GRID_WIDTH) and is_within_grid_bounds(int(goal_point[1]), GRID_HEIGHT))): #ensure bounds check
         print("X must be >=0 and less than " +  str(GRID_WIDTH) + " and Y must be >= 0 and less than " + str(GRID_HEIGHT))
         goal_point = input("Enter the goal point as x,y: ")
         goal_point = goal_point.split()
