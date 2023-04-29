@@ -74,7 +74,7 @@ async def drive_to_next_tile(base, current_point: tuple, new_coordinate_pt: tupl
 
 async def main():
     # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
-    start_point = (4,4)
+    start_point = (4,0)
 
     goal_point = input("Enter the goal point as x y: ")
     goal_point = goal_point.split()
