@@ -24,39 +24,41 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 ## Minimum Viable Product Results (as of 04/22/2023)
 ### Run Command to Drive Rover: `python motor_driver.py`
 ```
-pi@headlesspi:~/DGMD-E-17-Autonomous-Indoor-Rover-Final-Project $ python motor_driver.py
-2023-04-24 21:56:25,416		INFO	viam.rpc.dial (dial.py:209)	Connecting to socket: /tmp/proxy-KqmhUfy3.sock
+pi@headlesspi:~/DGMD-S-17-Autonomous-Indoor-Rover-Final-Project $ python motor_driver.py
+Enter the goal point as x y: 0 4
+connecting rover to Viam server...
+2023-04-27 22:31:55,166		INFO	viam.rpc.dial (dial.py:209)	Connecting to socket: /tmp/proxy-64D4HUGj.sock
+calculating shortest path...
 driving to :(4, 1)
-spin right 90 degrees
-move straight
-spin left 90 degrees
+spinning right 90 degrees
+moving straight
+spinning left 90 degrees
 driving to :(4, 2)
-spin right 90 degrees
-move straight
-spin left 90 degrees
+spinning right 90 degrees
+moving straight
+spinning left 90 degrees
 driving to :(4, 3)
-spin right 90 degrees
-move straight
-spin left 90 degrees
+spinning right 90 degrees
+moving straight
+spinning left 90 degrees
 driving to :(4, 4)
-spin right 90 degrees
-move straight
-spin left 90 degrees
+spinning right 90 degrees
+moving straight
+spinning left 90 degrees
 driving to :(3, 4)
-move straight
+moving straight
 driving to :(2, 4)
-move straight
+moving straight
 driving to :(1, 4)
-move straight
+moving straight
 driving to :(0, 4)
-move straight
+moving straight
+closing client connection to Viam server...
 ```
-
 ### PathPlanner Results: `python3 path_planning/test_dijkstra_path_planner.py`
-*Note: There were some import issues PathPlanner module. As such, for the sake of time, the `motor_driver.py` file used a hardcoded list of coordinate points to simulate the shortest path. Fortunately, this can be quickly remediated and showing the unit tests below indeed proves it's fully functioning!*
+
 ```
-Kess-MBP:autonomous_rover_project keslermathieu$ python3 path_planning/test_dijkstra_path_planner.py
-.............
+Kess-MBP:autonomous_rover_project keslermathieu$ python3 path_planning test_dijkstra_path_planner.py
 ----------------------------------------------------------------------
 Ran 13 tests in 12.282s
 
