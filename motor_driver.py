@@ -61,7 +61,7 @@ async def drive_to_next_tile(base, current_point: tuple, new_coordinate_pt: tupl
         await move_forward_1_foot(base)
 
     # drive to left tile
-    elif new_coordinate_pt[0] == current_point[0] - 1:
+    elif new_coordinate_pt[1] == current_point[1] - 1:
         await drive_left_1_foot(base)
 
     # drive to right tile
