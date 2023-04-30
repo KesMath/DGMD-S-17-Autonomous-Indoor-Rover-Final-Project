@@ -31,13 +31,13 @@ async def spin_left_90_degrees(base):
     # Spins the Viam Rover 90 degrees at 100 degrees per second
     # Experimentally, I had to reduce by 10 degrees since 90 deg was overshot
     print("spinning left 90 degrees")
-    await base.spin(velocity=100, angle=80)
+    await base.spin(velocity=100, angle=95)
 
 async def spin_right_90_degrees(base):
     # Spins the Viam Rover 90 degrees at 100 degrees per second
     # Experimentally, I had to reduce by 10 degrees since 90 deg was overshot
     print("spinning right 90 degrees")
-    await base.spin(velocity=100, angle=-80)
+    await base.spin(velocity=100, angle=-95)
 
 async def drive_right_1_foot(base):
     await spin_right_90_degrees(base)
@@ -152,8 +152,8 @@ async def main():
 # async def main():
 #     print("connecting rover to Viam server...")
 #     robot_client = await connect()
-#     # walk enclosure
-#     # drive to destination
+#     # walk enclosure to generate 2D mapping
+#     # calculate shortest path and drive to destination 
 #     # drive back to starting point
 #     print("closing client connection to Viam server...")
 #     await robot_client.close()
