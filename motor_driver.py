@@ -72,27 +72,27 @@ async def drive_to_next_tile(base, current_point: tuple, new_coordinate_pt: tupl
     elif new_coordinate_pt[0] == current_point[0] + 1  and new_coordinate_pt[1] == current_point[1]:
         await move_backward_1_foot(base)
 
-async def drive_5_foot_straight(base):
+async def drive_perimeter_wall(base):
     # Moves the Viam Rover forward 2500mm at 625mm/s
     print("moving straight 5 feet")
     await base.move_straight(velocity=625, distance=2500)
 
-async def walk_enclosure_perimeter(base):
+async def walk_enclosure(base):
     # walk perimeter generate 2D Map with LiDAR Sensor
-    await drive_5_foot_straight(roverBase)
-    time.sleep(6)
+    await drive_perimeter_wall(roverBase)
+    time.sleep(3)
     await spin_right_90_degrees(roverBase)
     time.sleep(2)
-    await drive_5_foot_straight(roverBase)
-    time.sleep(6)
+    await drive_perimeter_wall(roverBase)
+    time.sleep(3)
     await spin_right_90_degrees(roverBase)
     time.sleep(2)
-    await drive_5_foot_straight(roverBase)
-    time.sleep(6)
+    await drive_perimeter_wall(roverBase)
+    time.sleep(3)
     await spin_right_90_degrees(roverBase)
     time.sleep(2)
-    await drive_5_foot_straight(roverBase)
-    time.sleep(6)
+    await drive_perimeter_wall(roverBase)
+    time.sleep(3)
     await spin_right_90_degrees(roverBase)
     time.sleep(2)
 
@@ -101,8 +101,7 @@ async def main():
     print("connecting rover to Viam server...")
     robot_client = await connect()
     roverBase = Base.from_robot(robot_client, 'viam_base')
-    await drive_5_foot_straight(roverBase)
-    time.sleep(6)
+    await walk_enclosure(roverBase)
     print("closing client connection to Viam server...")
     await robot_client.close()
 
