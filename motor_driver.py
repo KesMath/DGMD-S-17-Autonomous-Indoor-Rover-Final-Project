@@ -147,5 +147,16 @@ async def main():
 #     print("closing client connection to Viam server...")
 #     await robot_client.close()
 
+
+# TODO: implement me when business logic is done!!
+# async def main():
+#     print("connecting rover to Viam server...")
+#     robot_client = await connect()
+#     # walk enclosure
+#     # drive to destination
+#     # drive back to starting point
+#     print("closing client connection to Viam server...")
+#     await robot_client.close()
+
 if __name__ == '__main__':
     asyncio.run(main())
