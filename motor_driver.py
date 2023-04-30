@@ -97,7 +97,7 @@ async def walk_enclosure(base):
     time.sleep(2)
 
 
-async def main():
+async def get_2D_Map_of_enclosure():
     print("connecting rover to Viam server...")
     robot_client = await connect()
     roverBase = Base.from_robot(robot_client, 'viam_base')
@@ -156,4 +156,4 @@ async def main():
 #     await robot_client.close()
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    asyncio.run(get_2D_Map_of_enclosure())
