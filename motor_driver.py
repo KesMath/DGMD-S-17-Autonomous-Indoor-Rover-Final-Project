@@ -72,44 +72,81 @@ async def drive_to_next_tile(base, current_point: tuple, new_coordinate_pt: tupl
     elif new_coordinate_pt[0] == current_point[0] + 1  and new_coordinate_pt[1] == current_point[1]:
         await move_backward_1_foot(base)
 
+async def drive_5_foot_straight(base):
+    # Moves the Viam Rover forward 2500mm at 625mm/s
+    print("moving straight 5 feet")
+    await base.move_straight(velocity=625, distance=2500)
+
+async def walk_enclosure_perimeter(base):
+    # walk perimeter generate 2D Map with LiDAR Sensor
+    await drive_5_foot_straight(roverBase)
+    time.sleep(6)
+    await spin_right_90_degrees(roverBase)
+    time.sleep(2)
+    await drive_5_foot_straight(roverBase)
+    time.sleep(6)
+    await spin_right_90_degrees(roverBase)
+    time.sleep(2)
+    await drive_5_foot_straight(roverBase)
+    time.sleep(6)
+    await spin_right_90_degrees(roverBase)
+    time.sleep(2)
+    await drive_5_foot_straight(roverBase)
+    time.sleep(6)
+    await spin_right_90_degrees(roverBase)
+    time.sleep(2)
+
+
 async def main():
-    # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
-    start_point = (4,0)
-
-    goal_point = input("Enter the goal point as x y: ")
-    goal_point = goal_point.split()
-    while(not (is_within_grid_bounds(int(goal_point[0]), GRID_WIDTH) and is_within_grid_bounds(int(goal_point[1]), GRID_HEIGHT))): #ensure bounds check
-        print("X must be >=0 and less than " +  str(GRID_WIDTH) + " and Y must be >= 0 and less than " + str(GRID_HEIGHT))
-        goal_point = input("Enter the goal point as x,y: ")
-        goal_point = goal_point.split()
-    
-    goal_point = (int(goal_point[0]) , int(goal_point[1]))
-
     print("connecting rover to Viam server...")
     robot_client = await connect()
-
-    # Get the base component from the Viam Rover
     roverBase = Base.from_robot(robot_client, 'viam_base')
-
-    print("calculating shortest path...")
-    shortest_path = return_shortest_path(start_point = start_point, goal_point = goal_point, width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
-
-    del shortest_path[0] # remove current point
-
-    if shortest_path is not None:
-        for node in shortest_path:
-            next_point = node.get_coordinate_pt()
-            print("driving to :" + str(next_point))
-            await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
-            time.sleep(1)
-            # need to update starting point since robot moved to a new position
-            start_point = next_point
-    else:
-        print("Rover unable to find shortest path... ")
-
-    # close server connection
+    await drive_5_foot_straight(roverBase)
+    time.sleep(6)
     print("closing client connection to Viam server...")
     await robot_client.close()
+
+# async def main():
+#     # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
+#     start_point = (4,0)
+
+#     goal_point = input("Enter the goal point as x y: ")
+#     goal_point = goal_point.split()
+#     while(not (is_within_grid_bounds(int(goal_point[0]), GRID_WIDTH) and is_within_grid_bounds(int(goal_point[1]), GRID_HEIGHT))): #ensure bounds check
+#         print("X must be >=0 and less than " +  str(GRID_WIDTH) + " and Y must be >= 0 and less than " + str(GRID_HEIGHT))
+#         goal_point = input("Enter the goal point as x,y: ")
+#         goal_point = goal_point.split()
+    
+#     goal_point = (int(goal_point[0]) , int(goal_point[1]))
+
+#     print("connecting rover to Viam server...")
+#     robot_client = await connect()
+
+#     # Get the base component from the Viam Rover
+#     roverBase = Base.from_robot(robot_client, 'viam_base')
+
+#     # walk perimeter to generate 2D Map with LiDAR Sensor
+#     await walk_enclosure_perimeter(roverBase)
+
+#     print("calculating shortest path...")
+#     shortest_path = return_shortest_path(start_point = start_point, goal_point = goal_point, width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
+
+#     del shortest_path[0] # remove current point
+
+#     if shortest_path is not None:
+#         for node in shortest_path:
+#             next_point = node.get_coordinate_pt()
+#             print("driving to :" + str(next_point))
+#             await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
+#             time.sleep(1)
+#             # need to update starting point since robot moved to a new position
+#             start_point = next_point
+#     else:
+#         print("Rover unable to find shortest path... ")
+
+#     # close server connection
+#     print("closing client connection to Viam server...")
+#     await robot_client.close()
 
 if __name__ == '__main__':
     asyncio.run(main())
