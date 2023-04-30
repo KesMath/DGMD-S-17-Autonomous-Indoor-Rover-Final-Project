@@ -79,21 +79,21 @@ async def drive_perimeter_wall(base):
 
 async def walk_enclosure(base):
     # walk perimeter generate 2D Map with LiDAR Sensor
-    await drive_perimeter_wall(roverBase)
+    await drive_perimeter_wall(base)
     time.sleep(3)
-    await spin_right_90_degrees(roverBase)
+    await spin_right_90_degrees(base)
     time.sleep(2)
-    await drive_perimeter_wall(roverBase)
+    await drive_perimeter_wall(base)
     time.sleep(3)
-    await spin_right_90_degrees(roverBase)
+    await spin_right_90_degrees(base)
     time.sleep(2)
-    await drive_perimeter_wall(roverBase)
+    await drive_perimeter_wall(base)
     time.sleep(3)
-    await spin_right_90_degrees(roverBase)
+    await spin_right_90_degrees(base)
     time.sleep(2)
-    await drive_perimeter_wall(roverBase)
+    await drive_perimeter_wall(base)
     time.sleep(3)
-    await spin_right_90_degrees(roverBase)
+    await spin_right_90_degrees(base)
     time.sleep(2)
 
 
@@ -125,7 +125,7 @@ async def main():
 #     roverBase = Base.from_robot(robot_client, 'viam_base')
 
 #     # walk perimeter to generate 2D Map with LiDAR Sensor
-#     await walk_enclosure_perimeter(roverBase)
+#     await walk_enclosure(roverBase)
 
 #     print("calculating shortest path...")
 #     shortest_path = return_shortest_path(start_point = start_point, goal_point = goal_point, width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
