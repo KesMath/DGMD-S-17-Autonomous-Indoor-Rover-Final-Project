@@ -9,7 +9,7 @@ class LidarDriver:
         self.lidar = RPLidar(None, port_name, timeout=3)
         self.lidar.connect()
 
-    def scan_enclosure() -> pd.DataFrame:
+    def scan_enclosure(self) -> pd.DataFrame:
         """
         persists angle and distance data as a pandas dataframe 
         """
@@ -30,7 +30,7 @@ class LidarDriver:
             self.lidar.stop_motor()
         return pd.DataFrame(sensor_data)
 
-    def shutdown():
+    def shutdown(self) -> None:
         if self.lidar.motor_running:
             print("shutting down lidar...")
             self.lidar.stop()
