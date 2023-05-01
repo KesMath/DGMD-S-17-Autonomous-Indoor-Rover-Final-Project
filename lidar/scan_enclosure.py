@@ -20,6 +20,8 @@ def scan_enclosure() -> pd.DataFrame:
     while time.time() < t_end:
         for scan in lidar.iter_scans():       
             for (_, angle, distance) in scan:
+                print(angle)
+                print(distance)
                 sensor_data.append([angle, distance])
 
     # disconnecting resource
