@@ -9,7 +9,8 @@ def scan_enclosure() -> pd.DataFrame:
     and persist angle and distance data as a pandas dataframe 
     """
     # setup connection to device
-
+    SAMPLING_TIME = 25
+    
     sensor_data = list()
     # iterating for 20 sec and persisting lidar reading to 2D array
     t_end = time.time() + SAMPLING_TIME
