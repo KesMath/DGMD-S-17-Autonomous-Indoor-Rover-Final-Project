@@ -1,8 +1,10 @@
 import time
 import asyncio
 
-from path_planning.dijkstra_path_planner import *
+from slam.scan_enclosure import *
 from path_planning.grid_maps import *
+from path_planning.dijkstra_path_planner import *
+
 from viam.components.base import Base
 from viam.robot.client import RobotClient
 from viam.rpc.dial import Credentials, DialOptions
@@ -98,12 +100,18 @@ async def walk_enclosure(base):
 
 
 async def get_2D_Map_of_enclosure():
-    print("connecting rover to Viam server...")
-    robot_client = await connect()
-    roverBase = Base.from_robot(robot_client, 'viam_base')
-    await walk_enclosure(roverBase)
-    print("closing client connection to Viam server...")
-    await robot_client.close()
+    # print("connecting rover to Viam server...")
+    # robot_client = await connect()
+    # roverBase = Base.from_robot(robot_client, 'viam_base')
+    # await walk_enclosure(roverBase)
+    # print("closing client connection to Viam server...")
+    # await robot_client.close()
+
+    driver = LidarDriver(port_name= "/dev/ttyUSB0")
+    df = driver.scan_enclosure()
+    df.to_csv('/slam/enclosure_sampling.csv', header = False)
+    print(df)
+    driver.shutdown()
 
 # async def main():
 #     # TODO: see if this can dynamically be mapped to grid cell after SLAM localization

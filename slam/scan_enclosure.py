@@ -3,7 +3,6 @@ import pandas as pd
 from adafruit_rplidar import RPLidar
 
 class LidarDriver:
-
     def __init__(self, port_name: str):
         # setup connection to device
         self.lidar = RPLidar(None, port_name, timeout=3)
@@ -36,8 +35,3 @@ class LidarDriver:
             print("shutting down lidar...")
             self.lidar.stop()
             self.lidar.stop_motor()
-
-if __name__ == '__main__':
-    driver = LidarDriver(port_name= "/dev/ttyUSB0")
-    print(driver.scan_enclosure())
-    driver.shutdown()
