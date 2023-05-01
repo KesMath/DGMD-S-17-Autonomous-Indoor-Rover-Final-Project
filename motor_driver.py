@@ -109,7 +109,7 @@ async def get_2D_Map_of_enclosure():
 
     driver = LidarDriver(port_name= "/dev/ttyUSB0")
     df = driver.scan_enclosure()
-    df.to_csv('/slam/enclosure_sampling.csv', header = False)
+    df.to_csv('slam/enclosure_sampling.csv', header = False)
     print(df)
     driver.shutdown()
 
