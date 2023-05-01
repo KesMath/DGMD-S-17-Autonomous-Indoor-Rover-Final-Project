@@ -27,10 +27,8 @@ class LidarDriver:
         # disconnecting resource
         finally:
             print("disconnecting lidar...")
-            print("motor_running: " + str(self.lidar.motor_running))
             self.lidar.stop()
             self.lidar.stop_motor()
-            print("motor_running: " + str(self.lidar.motor_running))
         return pd.DataFrame(sensor_data)
 
     def shutdown(self) -> None:
