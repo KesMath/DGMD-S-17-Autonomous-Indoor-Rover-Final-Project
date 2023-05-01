@@ -15,9 +15,10 @@ class LidarDriver:
         """
         sensor_data = list()
 
-        for scan in self.lidar.iter_scans():      
-            for (_, angle, distance) in scan:
-                sensor_data.append([angle, distance])
+        try:
+            for scan in self.lidar.iter_scans():      
+                for (_, angle, distance) in scan:
+                    sensor_data.append([angle, distance])
 
         except KeyboardInterrupt:
             print("Stopping lidar...")
