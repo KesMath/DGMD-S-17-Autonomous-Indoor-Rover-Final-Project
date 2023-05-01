@@ -16,7 +16,8 @@ class LidarDriver:
         sensor_data = list()
 
         try:
-            for scan in self.lidar.iter_scans():      
+            for scan in self.lidar.iter_scans():
+                print("sampling enclosure...")      
                 for (_, angle, distance) in scan:
                     sensor_data.append([angle, distance])
 
@@ -26,8 +27,10 @@ class LidarDriver:
         # disconnecting resource
         finally:
             print("disconnecting lidar...")
+            print("motor_running: " + str(self.lidar.motor_running))
             self.lidar.stop()
             self.lidar.stop_motor()
+            print("motor_running: " + str(self.lidar.motor_running))
         return pd.DataFrame(sensor_data)
 
     def shutdown(self) -> None:
@@ -38,5 +41,5 @@ class LidarDriver:
 
 if __name__ == '__main__':
     driver = LidarDriver(port_name= "/dev/ttyUSB0")
-    driver.scan_enclosure()
+    print(driver.scan_enclosure())
     driver.shutdown()
