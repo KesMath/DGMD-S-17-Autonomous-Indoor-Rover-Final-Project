@@ -2,38 +2,40 @@ import time
 import pandas as pd
 from adafruit_rplidar import RPLidar
 
+class LidarDriver:
 
-def scan_enclosure() -> pd.DataFrame:
-    """
-    takes a 25 sec sampling of NxN sq ft enclosure
-    and persist angle and distance data as a pandas dataframe 
-    """
-    # setup connection to device
-    SAMPLING_TIME = 25
-    PORT_NAME = "/dev/ttyUSB0"
-    lidar = RPLidar(None, PORT_NAME, timeout=3)
-    lidar.connect()
+    def __init__(self, port_name: str):
+        # setup connection to device
+        self.lidar = RPLidar(None, port_name, timeout=3)
+        self.lidar.connect()
 
-    sensor_data = list()
-    # iterating for 20 sec and persisting lidar reading to 2D array
-    t_end = time.time() + SAMPLING_TIME
+    def scan_enclosure() -> pd.DataFrame:
+        """
+        persists angle and distance data as a pandas dataframe 
+        """
+        sensor_data = list()
 
-    try:
-        while time.time() < t_end:
-            print("saving lidar data to dataframe...")
-            for scan in lidar.iter_scans():      
-                for (_, angle, distance) in scan:
-                    sensor_data.append([angle, distance])
+        for scan in self.lidar.iter_scans():      
+            for (_, angle, distance) in scan:
+                sensor_data.append([angle, distance])
 
-    except KeyboardInterrupt:
-        print("Stopping lidar...")
+        except KeyboardInterrupt:
+            print("Stopping lidar...")
 
-    # disconnecting resource
-    finally:
-        print("disconnecting lidar...")
-        lidar.stop()
-        lidar.stop_motor()
-    return pd.DataFrame(sensor_data)
+        # disconnecting resource
+        finally:
+            print("disconnecting lidar...")
+            self.lidar.stop()
+            self.lidar.stop_motor()
+        return pd.DataFrame(sensor_data)
+
+    def shutdown():
+        if self.lidar.motor_running:
+            print("shutting down lidar...")
+            self.lidar.stop()
+            self.lidar.stop_motor()
 
 if __name__ == '__main__':
-    scan_enclosure()
+    driver = LidarDriver(port_name= "/dev/ttyUSB0")
+    driver.scan_enclosure()
+    driver.shutdown()
