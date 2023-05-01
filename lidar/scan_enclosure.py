@@ -9,10 +9,6 @@ def scan_enclosure() -> pd.DataFrame:
     and persist angle and distance data as a pandas dataframe 
     """
     # setup connection to device
-    SAMPLING_TIME = 25
-    PORT_NAME = "/dev/ttyUSB0"
-    lidar = RPLidar(None, PORT_NAME)
-    lidar.connect()
 
     sensor_data = list()
     # iterating for 20 sec and persisting lidar reading to 2D array
@@ -25,9 +21,12 @@ def scan_enclosure() -> pd.DataFrame:
                 sensor_data.append([angle, distance])
 
     # disconnecting resource
-    lidar.stop()
-    lidar.stop_motor()
     return pd.DataFrame(sensor_data)
 
 if __name__ == '__main__':
-    print(scan_enclosure())
+    PORT_NAME = "/dev/ttyUSB0"
+    lidar = RPLidar(None, PORT_NAME, timeout=3)
+    lidar.connect()
+    scan_enclosure()
+    lidar.stop()
+    lidar.stop_motor()
