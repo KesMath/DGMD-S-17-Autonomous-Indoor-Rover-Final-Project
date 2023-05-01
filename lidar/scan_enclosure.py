@@ -17,17 +17,22 @@ def scan_enclosure() -> pd.DataFrame:
     sensor_data = list()
     # iterating for 20 sec and persisting lidar reading to 2D array
     t_end = time.time() + SAMPLING_TIME
-    while time.time() < t_end:
-        for scan in lidar.iter_scans():
-            print("daving lidar data to dataframe")       
-            for (_, angle, distance) in scan:
-                #print(angle)
-                #print(distance)
-                sensor_data.append([angle, distance])
+
+    try:
+        while time.time() < t_end:
+            print("saving lidar data to dataframe...")
+            for scan in lidar.iter_scans():      
+                for (_, angle, distance) in scan:
+                    sensor_data.append([angle, distance])
+
+    except KeyboardInterrupt:
+        print("Stopping lidar...")
 
     # disconnecting resource
-    lidar.stop()
-    lidar.stop_motor()
+    finally:
+        print("disconnecting lidar...")
+        lidar.stop()
+        lidar.stop_motor()
     return pd.DataFrame(sensor_data)
 
 if __name__ == '__main__':
