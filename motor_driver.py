@@ -1,6 +1,6 @@
 import time
 import asyncio
-
+import threading
 from slam.scan_enclosure import *
 from path_planning.grid_maps import *
 from path_planning.dijkstra_path_planner import *
@@ -100,18 +100,13 @@ async def walk_enclosure(base):
 
 
 async def get_2D_Map_of_enclosure():
-    # print("connecting rover to Viam server...")
-    # robot_client = await connect()
-    # roverBase = Base.from_robot(robot_client, 'viam_base')
-    # await walk_enclosure(roverBase)
-    # print("closing client connection to Viam server...")
-    # await robot_client.close()
-
     driver = LidarDriver(port_name= "/dev/ttyUSB0")
-    df = driver.scan_enclosure()
-    df.to_csv('slam/enclosure_sampling.csv', header = False, index = False)
-    print(df)
+    result = {'Dataframe': None}
+    t1 = threading.Thread(target=driver.scan_enclosure(), args = (result,))
+    t1.start()
+    t1.join(timeout = 25) # timeout function
     driver.shutdown()
+    result['Dataframe'].to_csv('slam/enclosure_sampling.csv', header = False, index = False)
 
 # async def main():
 #     # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
@@ -157,7 +152,7 @@ async def get_2D_Map_of_enclosure():
 # async def main():
 #     print("connecting rover to Viam server...")
 #     robot_client = await connect()
-#     # walk enclosure to generate 2D mapping
+#     # generate 2D mapping
 #     # calculate shortest path and drive to destination 
 #     # drive back to starting point
 #     print("closing client connection to Viam server...")
