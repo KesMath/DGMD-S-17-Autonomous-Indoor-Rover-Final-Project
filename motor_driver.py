@@ -101,15 +101,14 @@ async def walk_enclosure(base):
 
 async def get_2D_Map_of_enclosure():
     driver = LidarDriver(port_name= "/dev/ttyUSB0")
-    result = {'Dataframe': None}
-    t1 = threading.Thread(target=driver.scan_enclosure, args = [result])
+    t1 = threading.Thread(target=driver.scan_enclosure)
     print("starting thread...")
     t1.start()
     print("thread running...")
     t1.join(timeout = 25) # timeout function
     print("thread completed")
-    driver.shutdown()
-    result['Dataframe'].to_csv('slam/enclosure_sampling.csv', header = False, index = False)
+    driver.shutdown() # safely closes resources (will continue to spin since power is applied to motor)
+    driver.sample_df.to_csv('slam/enclosure_sampling.csv', header = False, index = False)
 
 # async def main():
 #     # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
