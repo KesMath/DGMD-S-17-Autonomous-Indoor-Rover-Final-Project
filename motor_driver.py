@@ -103,8 +103,11 @@ async def get_2D_Map_of_enclosure():
     driver = LidarDriver(port_name= "/dev/ttyUSB0")
     result = {'Dataframe': None}
     t1 = threading.Thread(target=driver.scan_enclosure(), args = (result,))
+    print("starting thread...")
     t1.start()
+    print("thread running...")
     t1.join(timeout = 25) # timeout function
+    print("thread completed")
     driver.shutdown()
     result['Dataframe'].to_csv('slam/enclosure_sampling.csv', header = False, index = False)
 
