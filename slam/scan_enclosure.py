@@ -29,8 +29,8 @@ class LidarDriver:
             self.lidar.stop()
             self.lidar.stop_motor()
 
-        df = pd.DataFrame(sensor_data)    
-        return result['Dataframe'] = df
+        result['Dataframe'] = pd.DataFrame(sensor_data)    
+        return result
 
     def shutdown(self) -> None:
         if self.lidar.motor_running:
