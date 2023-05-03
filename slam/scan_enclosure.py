@@ -24,13 +24,16 @@ class LidarDriver:
 
             except KeyboardInterrupt:
                 print("Stopping lidar due to keyboard interrupt...")
+                break
 
             except RPLidarException as e:
                 print("Stopping lidar due to exception raised: " + str(e))
-
-            # disconnecting resource
-            finally:
-                self.shutdown()
+                # comment out break statement if you want to supress exceptions and continue scanning.
+                # Warning!!! - may produce undesireable effects
+                break
+        
+        # disconnecting resource
+        self.shutdown()
 
     def shutdown(self) -> None:
         if self.lidar.motor_running:
