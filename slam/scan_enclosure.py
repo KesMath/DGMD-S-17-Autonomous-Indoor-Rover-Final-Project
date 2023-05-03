@@ -53,4 +53,3 @@ class LidarDriver:
 if __name__ == '__main__':
     driver = LidarDriver(port_name= "/dev/ttyUSB0")
     driver.scan_enclosure()
-    print(driver.sampling_df)
