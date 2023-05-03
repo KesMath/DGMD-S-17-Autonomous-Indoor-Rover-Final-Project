@@ -102,7 +102,7 @@ async def get_2D_Map_of_enclosure():
     driver = LidarDriver(port_name= "/dev/ttyUSB0")
     driver.scan_enclosure()
     driver.sampling_df.to_csv('slam/enclosure_sampling.csv', header = False, index = False)
-    # SUBPROCESS ME: "python slam/scan_enclosure.py > slam/sampling.csv"
+    # SUBPROCESS ME: "python lidar/scan1.py > slam/sampling.csv"
 
 # async def main():
 #     # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
