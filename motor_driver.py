@@ -99,9 +99,16 @@ async def walk_enclosure(base):
 
 
 async def get_2D_Map_of_enclosure():
-    driver = LidarDriver(port_name= "/dev/ttyUSB0")
-    driver.scan_enclosure()
-    driver.sampling_df.to_csv('slam/enclosure_sampling.csv', header = False, index = False)
+    # driver = LidarDriver(port_name= "/dev/ttyUSB0")
+    # driver.scan_enclosure()
+    # driver.sampling_df.to_csv('slam/enclosure_sampling.csv', header = False, index = False)
+
+    print("connecting rover to Viam server...")
+    robot_client = await connect()
+    roverBase = Base.from_robot(robot_client, 'viam_base')
+    await drive_perimeter_wall(roverBase)
+    print("closing client connection to Viam server...")
+    await robot_client.close()
 
 # async def main():
 #     # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
