@@ -28,7 +28,7 @@ class LidarDriver:
                     #print("sampling enclosure...")      
                     for (_, angle, distance) in scan: 
                         #self.sampling_df.loc[len(self.sampling_df)] = [angle, distance]
-                        print(angle, distance)
+                        print(str(angle) + "," + str(distance))
 
             except KeyboardInterrupt:
                 #print("Stopping lidar due to keyboard interrupt...")
