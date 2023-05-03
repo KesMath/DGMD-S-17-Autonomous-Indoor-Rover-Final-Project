@@ -22,8 +22,11 @@ class LidarDriver:
                     for (_, angle, distance) in scan:
                         self.sampling_df.loc[len(self.sampling_df)] = [angle, distance]
 
-            except KeyboardInterrupt, RPLidarException:
-                print("Stopping lidar due to interruption or exception raised...")
+            except KeyboardInterrupt:
+                print("Stopping lidar due to keyboard interrupt...")
+
+            except RPLidarException:
+                print("Stopping lidar due to exception raised...")
 
             # disconnecting resource
             finally:
