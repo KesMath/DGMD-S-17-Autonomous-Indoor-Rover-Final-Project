@@ -107,7 +107,7 @@ async def get_2D_Map_of_enclosure():
     t1.join(timeout = 25) # timeout function
     print("thread completed")
     driver.shutdown() # safely closes resources (will continue to spin since power is applied to motor)
-    driver.sample_df.to_csv('slam/enclosure_sampling.csv', header = False, index = False)
+    driver.sampling_df.to_csv('slam/enclosure_sampling.csv', header = False, index = False)
 
 # async def main():
 #     # TODO: see if this can dynamically be mapped to grid cell after SLAM localization

@@ -7,7 +7,7 @@ class LidarDriver:
         # setup connection to device
         self.lidar = RPLidar(None, port_name, timeout=3)
         self.lidar.connect()
-        self.sample_df = pd.DataFrame(columns = ['Angle', 'Distance'])
+        self.sampling_df = pd.DataFrame(columns = ['Angle', 'Distance'])
 
     def scan_enclosure(self):
         """
@@ -20,16 +20,14 @@ class LidarDriver:
                 for scan in self.lidar.iter_scans():
                     print("sampling enclosure...")      
                     for (_, angle, distance) in scan:
-                        self.sample_df.loc[len(self.sample_df)] = [angle, distance]
+                        self.sampling_df.loc[len(self.sampling_df)] = [angle, distance]
 
             except KeyboardInterrupt:
                 print("Stopping lidar...")
 
             # disconnecting resource
             finally:
-                print("disconnecting lidar...")
-                self.lidar.stop()
-                self.lidar.stop_motor()
+                self.shutdown()
 
     def shutdown(self) -> None:
         if self.lidar.motor_running:
@@ -40,5 +38,5 @@ class LidarDriver:
 
 if __name__ == '__main__':
     driver = LidarDriver(port_name= "/dev/ttyUSB0")
-    print(driver.scan_enclosure())
-    driver.shutdown()
+    driver.scan_enclosure()
+    print(driver.sampling_df)
