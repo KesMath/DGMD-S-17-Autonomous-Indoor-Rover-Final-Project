@@ -25,8 +25,8 @@ class LidarDriver:
             except KeyboardInterrupt:
                 print("Stopping lidar due to keyboard interrupt...")
 
-            except RPLidarException:
-                print("Stopping lidar due to exception raised...")
+            except RPLidarException as e:
+                print("Stopping lidar due to exception raised: " + str(e))
 
             # disconnecting resource
             finally:
