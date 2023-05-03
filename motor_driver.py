@@ -101,7 +101,6 @@ async def walk_enclosure(base):
 async def get_2D_Map_of_enclosure():
     driver = LidarDriver(port_name= "/dev/ttyUSB0")
     driver.scan_enclosure()
-    driver.shutdown() # safely closes resources (will continue to spin since power is applied to motor)
     driver.sampling_df.to_csv('slam/enclosure_sampling.csv', header = False, index = False)
 
 # async def main():

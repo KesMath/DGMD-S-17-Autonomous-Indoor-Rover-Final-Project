@@ -17,9 +17,16 @@ class LidarDriver:
         stop = datetime.datetime.now() + delta
         while datetime.datetime.now() < stop:
             try:
+                # WARNING!!
+                # "Iterate over scans.
+                # Note that consumer must be fast enough,
+                # otherwise data will be accumulated inside buffer and consumer will get data with increasing lag."
+                # Thus appending to this data structure may be the cause of Exceptions raised
+                # as it can be deemed as a slow consumer so calling script through subprocess and
+                # accumulating results from std.out to csv format may be more reliable!!
                 for scan in self.lidar.iter_scans():
                     print("sampling enclosure...")      
-                    for (_, angle, distance) in scan:
+                    for (_, angle, distance) in scan: 
                         self.sampling_df.loc[len(self.sampling_df)] = [angle, distance]
 
             except KeyboardInterrupt:
