@@ -1,6 +1,6 @@
 import datetime
 import pandas as pd
-from adafruit_rplidar import RPLidar
+from adafruit_rplidar import RPLidar, RPLidarException
 
 class LidarDriver:
     def __init__(self, port_name: str):
@@ -22,8 +22,8 @@ class LidarDriver:
                     for (_, angle, distance) in scan:
                         self.sampling_df.loc[len(self.sampling_df)] = [angle, distance]
 
-            except KeyboardInterrupt:
-                print("Stopping lidar...")
+            except KeyboardInterrupt, RPLidarException:
+                print("Stopping lidar due to interruption or exception raised...")
 
             # disconnecting resource
             finally:
