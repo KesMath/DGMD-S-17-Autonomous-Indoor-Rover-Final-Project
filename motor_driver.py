@@ -106,7 +106,7 @@ async def get_2D_Map_of_enclosure():
     print("connecting rover to Viam server...")
     robot_client = await connect()
     roverBase = Base.from_robot(robot_client, 'viam_base')
-    await drive_perimeter_wall(roverBase)
+    await walk_enclosure(roverBase)
     print("closing client connection to Viam server...")
     await robot_client.close()
 
