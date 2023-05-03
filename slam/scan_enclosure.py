@@ -27,7 +27,8 @@ class LidarDriver:
                 for scan in self.lidar.iter_scans():
                     print("sampling enclosure...")      
                     for (_, angle, distance) in scan: 
-                        self.sampling_df.loc[len(self.sampling_df)] = [angle, distance]
+                        #self.sampling_df.loc[len(self.sampling_df)] = [angle, distance]
+                        print(angle, distance)
 
             except KeyboardInterrupt:
                 print("Stopping lidar due to keyboard interrupt...")
