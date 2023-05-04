@@ -126,8 +126,8 @@ async def main():
 
     print("calculating shortest path...")
     shortest_path = return_shortest_path(start_point = start_point, goal_point = goal_point, width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= RIGHT_TRIANGLE_BLOCK_GRID, resolution = STEP_COST)
-
-    del shortest_path[0] # remove current point
+    first_node = shortest_path[0]
+    del shortest_path[0] # remove current point to speed up drive time
 
     if shortest_path is not None:
         # Driving to destination
@@ -139,7 +139,18 @@ async def main():
             # need to update starting point since robot moved to a new position
             start_point = next_point
 
-        # Returning back from destination ... remember to add back first grid cell!!
+        # Returning back from destination
+        print("returning back to starting point...")
+        shortest_path.insert(0, first_node)
+        shortest_path.reverse()
+        del shortest_path[0] # remove current point to speed up drive time
+        for node in shortest_path:
+            next_point = node.get_coordinate_pt()
+            print("driving to :" + str(next_point))
+            await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
+            time.sleep(1)
+            # need to update starting point since robot moved to a new position
+            start_point = next_point
     else:
         print("Rover unable to find shortest path... ")
 
