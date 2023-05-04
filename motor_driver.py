@@ -140,7 +140,6 @@ async def main():
         # Returning back from destination
         print("returning back to starting point...")
         shortest_path.reverse()
-        del shortest_path[0] # remove current point to speed up drive time
         for node in shortest_path[1:]:
             next_point = node.get_coordinate_pt()
             print("driving to :" + str(next_point))
