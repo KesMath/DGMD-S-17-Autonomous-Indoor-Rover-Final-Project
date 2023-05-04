@@ -126,12 +126,10 @@ async def main():
 
     print("calculating shortest path...")
     shortest_path = return_shortest_path(start_point = start_point, goal_point = goal_point, width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= RIGHT_TRIANGLE_BLOCK_GRID, resolution = STEP_COST)
-    first_node = shortest_path[0]
-    del shortest_path[0] # remove current point to speed up drive time
 
     if shortest_path is not None:
         # Driving to destination
-        for node in shortest_path:
+        for node in shortest_path[1:]:
             next_point = node.get_coordinate_pt()
             print("driving to :" + str(next_point))
             await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
@@ -141,10 +139,9 @@ async def main():
 
         # Returning back from destination
         print("returning back to starting point...")
-        shortest_path.insert(0, first_node)
         shortest_path.reverse()
         del shortest_path[0] # remove current point to speed up drive time
-        for node in shortest_path:
+        for node in shortest_path[1:]:
             next_point = node.get_coordinate_pt()
             print("driving to :" + str(next_point))
             await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
@@ -157,17 +154,6 @@ async def main():
     # close server connection
     print("closing client connection to Viam server...")
     await robot_client.close()
-
-
-# TODO: implement me when business logic is done!!
-# async def main():
-#     print("connecting rover to Viam server...")
-#     robot_client = await connect()
-#     # generate 2D mapping
-#     # calculate shortest path and drive to destination 
-#     # drive back to starting point
-#     print("closing client connection to Viam server...")
-#     await robot_client.close()
 
 if __name__ == '__main__':
     asyncio.run(main())
