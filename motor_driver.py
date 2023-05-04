@@ -130,6 +130,7 @@ async def main():
     del shortest_path[0] # remove current point
 
     if shortest_path is not None:
+        # Driving to destination
         for node in shortest_path:
             next_point = node.get_coordinate_pt()
             print("driving to :" + str(next_point))
@@ -137,6 +138,8 @@ async def main():
             time.sleep(1)
             # need to update starting point since robot moved to a new position
             start_point = next_point
+
+        # Returning back from destination ... remember to add back first grid cell!!
     else:
         print("Rover unable to find shortest path... ")
 
