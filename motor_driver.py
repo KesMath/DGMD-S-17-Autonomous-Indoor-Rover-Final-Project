@@ -103,6 +103,7 @@ async def walk_enclosure(base):
 #     driver.scan_enclosure()
 #     driver.sampling_df.to_csv('slam/enclosure_sampling.csv', header = False, index = False)
     # SUBPROCESS ME: "python lidar/scan1.py > slam/sampling.csv"
+    # SUBPROCESS ME: "python slam/map.py"
 
 async def main():
     # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
