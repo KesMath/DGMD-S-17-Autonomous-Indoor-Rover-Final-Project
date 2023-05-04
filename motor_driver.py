@@ -98,50 +98,50 @@ async def walk_enclosure(base):
     time.sleep(2)
 
 
-async def get_2D_Map_of_enclosure():
-    driver = LidarDriver(port_name= "/dev/ttyUSB0")
-    driver.scan_enclosure()
-    driver.sampling_df.to_csv('slam/enclosure_sampling.csv', header = False, index = False)
+# async def get_2D_Map_of_enclosure():
+#     driver = LidarDriver(port_name= "/dev/ttyUSB0")
+#     driver.scan_enclosure()
+#     driver.sampling_df.to_csv('slam/enclosure_sampling.csv', header = False, index = False)
     # SUBPROCESS ME: "python lidar/scan1.py > slam/sampling.csv"
 
-# async def main():
-#     # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
-#     start_point = (4,0)
+async def main():
+    # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
+    start_point = (4,0)
 
-#     goal_point = input("Enter the goal point as x y: ")
-#     goal_point = goal_point.split()
-#     while(not (is_within_grid_bounds(int(goal_point[0]), GRID_WIDTH) and is_within_grid_bounds(int(goal_point[1]), GRID_HEIGHT))): #ensure bounds check
-#         print("X must be >=0 and less than " +  str(GRID_WIDTH) + " and Y must be >= 0 and less than " + str(GRID_HEIGHT))
-#         goal_point = input("Enter the goal point as x,y: ")
-#         goal_point = goal_point.split()
+    goal_point = input("Enter the goal point as x y: ")
+    goal_point = goal_point.split()
+    while(not (is_within_grid_bounds(int(goal_point[0]), GRID_WIDTH) and is_within_grid_bounds(int(goal_point[1]), GRID_HEIGHT))): #ensure bounds check
+        print("X must be >=0 and less than " +  str(GRID_WIDTH) + " and Y must be >= 0 and less than " + str(GRID_HEIGHT))
+        goal_point = input("Enter the goal point as x,y: ")
+        goal_point = goal_point.split()
     
-#     goal_point = (int(goal_point[0]) , int(goal_point[1]))
+    goal_point = (int(goal_point[0]) , int(goal_point[1]))
 
-#     print("connecting rover to Viam server...")
-#     robot_client = await connect()
+    print("connecting rover to Viam server...")
+    robot_client = await connect()
 
-#     # Get the base component from the Viam Rover
-#     roverBase = Base.from_robot(robot_client, 'viam_base')
+    # Get the base component from the Viam Rover
+    roverBase = Base.from_robot(robot_client, 'viam_base')
 
-#     print("calculating shortest path...")
-#     shortest_path = return_shortest_path(start_point = start_point, goal_point = goal_point, width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
+    print("calculating shortest path...")
+    shortest_path = return_shortest_path(start_point = start_point, goal_point = goal_point, width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= EMPTY_GRID, resolution = STEP_COST)
 
-#     del shortest_path[0] # remove current point
+    del shortest_path[0] # remove current point
 
-#     if shortest_path is not None:
-#         for node in shortest_path:
-#             next_point = node.get_coordinate_pt()
-#             print("driving to :" + str(next_point))
-#             await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
-#             time.sleep(1)
-#             # need to update starting point since robot moved to a new position
-#             start_point = next_point
-#     else:
-#         print("Rover unable to find shortest path... ")
+    if shortest_path is not None:
+        for node in shortest_path:
+            next_point = node.get_coordinate_pt()
+            print("driving to :" + str(next_point))
+            await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
+            time.sleep(1)
+            # need to update starting point since robot moved to a new position
+            start_point = next_point
+    else:
+        print("Rover unable to find shortest path... ")
 
-#     # close server connection
-#     print("closing client connection to Viam server...")
-#     await robot_client.close()
+    # close server connection
+    print("closing client connection to Viam server...")
+    await robot_client.close()
 
 
 # TODO: implement me when business logic is done!!
@@ -155,4 +155,4 @@ async def get_2D_Map_of_enclosure():
 #     await robot_client.close()
 
 if __name__ == '__main__':
-    asyncio.run(get_2D_Map_of_enclosure())
+    asyncio.run(main())
