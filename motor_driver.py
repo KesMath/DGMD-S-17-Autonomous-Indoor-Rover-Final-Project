@@ -123,7 +123,7 @@ async def main():
     # Get the base component from the Viam Rover
     roverBase = Base.from_robot(robot_client, 'viam_base')
 
-    time.sleep(5)
+    time.sleep(10)
     print("calculating shortest path...")
     shortest_path = return_shortest_path(start_point = start_point, goal_point = goal_point, width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= RIGHT_TRIANGLE_BLOCK_GRID, resolution = STEP_COST)
 
