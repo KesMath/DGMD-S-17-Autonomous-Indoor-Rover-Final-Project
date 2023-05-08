@@ -107,7 +107,7 @@ async def walk_enclosure(base):
 
 async def main():
     # TODO: see if this can dynamically be mapped to grid cell after SLAM localization
-    start_point = (2,2)
+    start_point = (4,0)
 
     goal_point = input("Enter the goal point as x y: ")
     goal_point = goal_point.split()
@@ -125,7 +125,7 @@ async def main():
     roverBase = Base.from_robot(robot_client, 'viam_base')
 
     print("calculating shortest path...")
-    shortest_path = return_shortest_path(start_point = start_point, goal_point = goal_point, width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= RIGHT_TRIANGLE_BLOCK_GRID, resolution = STEP_COST)
+    shortest_path = return_shortest_path(start_point = start_point, goal_point = goal_point, width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= DIAGONAL_OCCUPIED_GRID, resolution = STEP_COST)
 
     if shortest_path is not None:
         # Driving to destination
