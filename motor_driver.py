@@ -41,17 +41,17 @@ async def spin_right_90_degrees(base):
 
 async def drive_right_1_foot(base):
     await spin_right_90_degrees(base)
-    time.sleep(3)
+    time.sleep(1)
     await move_forward_1_foot(base)
-    time.sleep(3)
+    time.sleep(1)
     # re-centers rover forward
     await spin_left_90_degrees(base)
 
 async def drive_left_1_foot(base):
     await spin_left_90_degrees(base)
-    time.sleep(3)
+    time.sleep(1)
     await move_forward_1_foot(base)
-    time.sleep(3)
+    time.sleep(1)
     # re-centers rover forward
     await spin_right_90_degrees(base)
 
@@ -123,7 +123,6 @@ async def main():
     # Get the base component from the Viam Rover
     roverBase = Base.from_robot(robot_client, 'viam_base')
 
-    time.sleep(10)
     print("calculating shortest path...")
     shortest_path = return_shortest_path(start_point = start_point, goal_point = goal_point, width = GRID_WIDTH, height = GRID_HEIGHT, gridmap= RIGHT_TRIANGLE_BLOCK_GRID, resolution = STEP_COST)
 
@@ -133,7 +132,7 @@ async def main():
             next_point = node.get_coordinate_pt()
             print("driving to :" + str(next_point))
             await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
-            time.sleep(3)
+            time.sleep(1)
             # need to update starting point since robot moved to a new position
             start_point = next_point
 
