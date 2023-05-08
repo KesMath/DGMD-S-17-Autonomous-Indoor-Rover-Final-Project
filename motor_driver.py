@@ -41,17 +41,17 @@ async def spin_right_90_degrees(base):
 
 async def drive_right_1_foot(base):
     await spin_right_90_degrees(base)
-    time.sleep(1)
+    time.sleep(3)
     await move_forward_1_foot(base)
-    time.sleep(1)
+    time.sleep(3)
     # re-centers rover forward
     await spin_left_90_degrees(base)
 
 async def drive_left_1_foot(base):
     await spin_left_90_degrees(base)
-    time.sleep(1)
+    time.sleep(3)
     await move_forward_1_foot(base)
-    time.sleep(1)
+    time.sleep(3)
     # re-centers rover forward
     await spin_right_90_degrees(base)
 
@@ -132,7 +132,7 @@ async def main():
             next_point = node.get_coordinate_pt()
             print("driving to :" + str(next_point))
             await drive_to_next_tile(base = roverBase, current_point = start_point, new_coordinate_pt = next_point)
-            time.sleep(1)
+            time.sleep(3)
             # need to update starting point since robot moved to a new position
             start_point = next_point
 
