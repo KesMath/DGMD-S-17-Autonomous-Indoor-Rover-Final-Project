@@ -1,6 +1,5 @@
 import time
 import asyncio
-from slam.scan_enclosure import *
 from path_planning.grid_maps import *
 from path_planning.dijkstra_path_planner import *
 
