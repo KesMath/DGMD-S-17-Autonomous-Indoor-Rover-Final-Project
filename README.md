@@ -22,17 +22,17 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 ## GitHub Directory Description
 ```accelerometer/accelerometer.py```: script to get accelerometer data  
 ```lidar/scan1.py```: script to run a LiDAR scan  
-lidar/start1.py: script to connect to LiDAR   
-lidar/stop1.py: script to stop LiDAR  
-motor/main.py: script that moves the rover (forward, backwards, stop, etc)  
-path_planning/dijkstra_path_planner.py: implementation of dijkstra's algorithm  
-path_planning/grid_maps.py: file with test grid maps  
-path_planning/test_dijkstra_path_planner.py: script to test dijkstra's algorithm implementation  
-slam/lidar_data_01.csv: file of data from LiDAR scan  
-slam/map.py: script to create point cloud map  
-slam/OccupancyMap-2.ipynb: notebook to create occupany grid  
-slam/sampling_10.csv: data to create occupancy grid  
-motor_driver.py: script that controls motor driver for rover movement  
+```lidar/start1.py```: script to connect to LiDAR   
+```lidar/stop1.py```: script to stop LiDAR  
+```motor/main.py```: script that moves the rover (forward, backwards, stop, etc)  
+```path_planning/dijkstra_path_planner.py```: implementation of dijkstra's algorithm for shortest path creation  
+```path_planning/grid_maps.py```: file with grid maps to be loaded into path planner  
+```path_planning/test_dijkstra_path_planner.py```: unit test suite to test dijkstra's algorithm implementation upon different occupancy grid scenarios  
+```slam/lidar_data_01.csv:``` file of data from LiDAR scan  
+```slam/map.py```: script to create point cloud map  
+```slam/OccupancyMap-2.ipynb```: notebook to create occupany grid  
+```slam/sampling_10.csv```: data to create occupancy grid  
+```motor_driver.py```: main driver file - contains business logic that ties path planner to discrete rover movements (i.e. left, right, forward, backward) using VIAM SDK   
 
 
 ## Video Sample
