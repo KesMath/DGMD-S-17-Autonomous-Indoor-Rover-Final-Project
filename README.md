@@ -33,7 +33,7 @@ path_planning/test_dijkstra_path_planner.py: script to test dijkstra's algorithm
 slam/lidar_data_01.csv: file of data from LiDAR scan  
 slam/map.py: script to create point cloud map  
 slam/OccupancyMap-2.ipynb: notebook to create occupany grid  
-slam/sampling_10.csv: data to create occupancy grid
+slam/sampling_10.csv: data to create occupancy grid  
 motor_driver.py: script that controls motor driver for rover movement  
 
 
