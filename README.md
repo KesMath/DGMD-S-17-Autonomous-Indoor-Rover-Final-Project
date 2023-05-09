@@ -36,7 +36,7 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 
 
 ## Video Sample
-[Drive From Starting Point at (2,2) To Destination = (4,2) and Subsequently Returns Home](https://drive.google.com/file/d/1mu77br_SzW_rBbKL5Mkbw_J7l3BvrA6m/view?usp=share_link)
+[Drive From Starting Cell at (2,2) To Destination Cell = (4,2) with Subsequent Drive](https://drive.google.com/file/d/1mu77br_SzW_rBbKL5Mkbw_J7l3BvrA6m/view?usp=share_link)
 
 ## Run Command to Drive Rover: `python motor_driver.py`
 ```
