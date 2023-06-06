@@ -34,14 +34,14 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 
 ## Bill of Materials
 
-| Description  | URL  | Qty  | Units  | Unit Cost  | Cost |
-|--------------|------|------|--------|------------|------|
-|[Viam Chassis Rover (comes pre-assembled)](https://www.viam.com/resources/rover)             |      |      |        |            |      |
-|              |      |      |        |            |      |
-|              |      |      |        |            |      |
-|              |      |      |        |            |      |
-|              |      |      |        |            |      |
-|              |      |      |        |            |      |
+| Description  | Qty  | Units  | Unit Cost  | Cost |
+|--------------|------|------|--------|------------|
+|[Viam Chassis Rover (comes pre-assembled)](https://www.viam.com/resources/rover)|      |      |        |            |      |
+|              |      |      |        |            |
+|              |      |      |        |            |
+|              |      |      |        |            |
+|              |      |      |        |            |
+|              |      |      |        |            |
 
 ## Demo
 <img src="media/Sample_Drive_For_Video_Deliverable.gif" width="500" height="300">
