@@ -44,6 +44,9 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 |[Spare Set of 6pcs 1￵8￵6￵50 Rechargeable Batter￵y 5000mAh](https://a.co/d/hp6hN2T)|1|1|$17.99|$17.99|
 |[3D Print LiDAR Adapter](RPIidar_adapter.STL) [https://makelab.com]|1|1|$34.62|$34.62|
 |[Plywood Enclosure](https://www.lowes.com/pd/SurePly-1-4-in-Whitewood-Plywood-Application-as-4-x-4/50114743) - 4 X (Length=12" x Width=3/4" x H=60")|1|1|$20.98|$20.98|
+|[Everbilt Corner Brace 3in 4PK](https://www.homedepot.com/p/Everbilt-3-in-Stainless-Steel-Corner-Brace-4-Pack-14549/203339961)|1|1|$13.93|$13.93|
+|[Everbilt Flat Head Phillips #8-32 x 3/4"](https://www.homedepot.com/p/8-32-x-3-4-in-Phillips-Flat-Head-Zinc-Plated-Machine-Screw-8-Pack-803761/204274667)|1|1|$1.38|$1.38|
+|[24 Sq. Ft Optional Flooring](https://a.co/d/i6eyGMt)|1|1|$22.00|$22.00|
 
 
 ## Demo
