@@ -34,8 +34,11 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 
 ## Bill of Materials
 
-|   |   |   |   |   |
+| Description  | URL  | Qty  | Units  | Unit Cost  | Cost |
 |---|---|---|---|---|
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
 |   |   |   |   |   |
 |   |   |   |   |   |
 |   |   |   |   |   |
