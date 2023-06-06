@@ -99,10 +99,10 @@ Collection of angle data has been taken in three trials [Trial 1,](https://drive
 [Trial 3](https://drive.google.com/file/d/1NJ_CmgMRExUB6kOqvkRU7NzaHHwmbWIJ/view?usp=drive_link) where an external, gyroscope was placed on top of the rover to record the orientation at each phase of movement.
 
 $$
-\begin{align}
-    $$e_{i}=(expected&ensp;angle_{i} - measured&ensp;angle_{i})$$
-    $$MAE =\frac{1}{n} \sum_{i=1}^{n}|e_{i}|$$
-\end{align}
+\begin{equation}
+ e_{i}=(expected&ensp;angle_{i} - measured&ensp;angle_{i})
+ MAE =\frac{1}{n} \sum_{i=1}^{n}|e_{i}|
+\end{equation}
 $$
 
  The mean absolute error (MAE) with regards to the rover's orientation per trial are: <em><strong>5.50, 4.00, 4.38</strong></em> respectively. These values are relatively close to 0 which demonstrates the angles for each line segmentation are relatively close to what's expected thereby illustrating favorable navigation when deployed into other static indoor spaces.
