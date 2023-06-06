@@ -100,8 +100,8 @@ Collection of angle data has been taken in three trials [Trial 1,](https://drive
 
 $$
 \begin{align}
-$$e_{i}=(expected&ensp;angle_{i} - measured&ensp;angle_{i})$$
-$$MAE =\frac{1}{n} \sum_{i=1}^{n}|e_{i}|$$
+    $$e_{i}=(expected&ensp;angle_{i} - measured&ensp;angle_{i})$$
+    $$MAE =\frac{1}{n} \sum_{i=1}^{n}|e_{i}|$$
 \end{align}
 $$
 
