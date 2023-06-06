@@ -34,7 +34,7 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 
 
 ## Video Sample
-<a href=""><img src="media/Sample_Drive_For_Video_Deliverable_AdobeExpress.gif"></a>
+<a href="https://github.com/KesMath/DGMD-S-17-Autonomous-Indoor-Rover-Final-Project/tree/Cleanup/media/Sample_Drive_For_Video_Deliverable_AdobeExpress.gif"><img src="media/Sample_Drive_For_Video_Deliverable_AdobeExpress.gif"></a>
 
 ## Run Command to Drive Rover: `python motor_driver.py`
 ```
