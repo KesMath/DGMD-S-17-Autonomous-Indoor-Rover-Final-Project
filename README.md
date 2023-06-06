@@ -36,12 +36,12 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 
 | Description  | URL  | Qty  | Units  | Unit Cost  | Cost |
 |--------------|------|------|--------|------------|------|
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
+|              |      |      |        |            |      |
+|              |      |      |        |            |      |
+|              |      |      |        |            |      |
+|              |      |      |        |            |      |
+|              |      |      |        |            |      |
+|              |      |      |        |            |      |
 
 ## Demo
 <img src="media/Sample_Drive_For_Video_Deliverable.gif" width="500" height="300">
