@@ -5,7 +5,7 @@ Kesler Mathieu, Hung Tran, Ameera Zamani Iftekhar, Maggie Lau
 
 ## Type of Project
 Engineering - Graduate Level
-
+Full Report [here](Autonomous_Indoor_Rover_Report.pdf)
 
 ## Summary
 The goal at hand is to create a rover that can be deployed in an unknown indoor environment, autonomously navigate while capturing video feed, and subsequently return to its starting position. The central technique known as SLAM will allow the rover to concurrently map and locate itself in a newfound floorspace. This will subsequently be paired with path planning algorithms so the vehicle can efficiently navigate such space while avoiding collisions, henceforth achieving a level of autonomy sufficient enough for indoor exploration. 
