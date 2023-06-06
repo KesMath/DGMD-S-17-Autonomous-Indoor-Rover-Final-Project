@@ -36,9 +36,9 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 
 | Description  | Qty  | Units  | Unit Cost  | Cost |
 |--------------|------|------|--------|------------|
-|[Viam Chassis Rover (comes pre-assembled)](https://www.viam.com/resources/rover)|  1    |    1  | $99.00 | $99.00|
-|              |      |      |        |            |
-|              |      |      |        |            |
+|[Viam Chassis Rover (comes pre-assembled)](https://www.viam.com/resources/rover)|1|1|$99.00|$99.00|
+|[SlamTec RPI LIDAR Sensor](https://a.co/d/fh0p7Po) |1|1|$99.00|$99.00|
+|[Raspberry Pi 4 Model B 2019 Quad Core 64 Bit WiFi Bluetooth (4GB)](https://a.co/d/5zOuki6)|1|1|$90.00|$90.00|
 |              |      |      |        |            |
 |              |      |      |        |            |
 |              |      |      |        |            |
