@@ -98,6 +98,7 @@ Collection of angle data has been taken in three trials [Trial 1,](https://drive
 [Trial 2,](https://drive.google.com/file/d/1-yW1voN9yMVNddW7hGwMYWxfM7SlIpRM/view?usp=drive_link)
 [Trial 3](https://drive.google.com/file/d/1NJ_CmgMRExUB6kOqvkRU7NzaHHwmbWIJ/view?usp=drive_link) where an external, gyroscope was placed on top of the rover to record the orientation at each phase of movement.
 
+$$MAE =\frac{1}{n} \sum_{i=1}^{n}|e_{i}|$$
 $$e_{i}=(expected&ensp;angle_{i} - measured&ensp;angle_{i})$$ <br>
 $$MAE =\frac{1}{n} \sum_{i=1}^{n}|e_{i}|$$
 
