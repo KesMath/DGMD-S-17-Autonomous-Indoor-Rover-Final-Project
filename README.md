@@ -91,7 +91,7 @@ moving straight
 driving to :(0, 4)
 moving straight
 closing client connection to Viam server...
-
+```
 
 ## Results
 
