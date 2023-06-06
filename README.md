@@ -33,8 +33,8 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 ```motor_driver.py```: entry point file - contains business logic that ties path planner to discrete rover movements (i.e. left, right, forward, backward) using VIAM SDK   
 
 
-## Video Sample
-<a href="https://github.com/KesMath/DGMD-S-17-Autonomous-Indoor-Rover-Final-Project/tree/Cleanup/media/Sample_Drive_For_Video_Deliverable_AdobeExpress.gif"><img src="media/Sample_Drive_For_Video_Deliverable_AdobeExpress.gif"></a>
+## Demo
+<a><img src="media/Sample_Drive_For_Video_Deliverable_AdobeExpress.gif"></a>
 
 ## Run Command to Drive Rover: `python motor_driver.py`
 ```
