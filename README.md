@@ -47,6 +47,7 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 |[Everbilt Corner Brace 3in 4PK](https://www.homedepot.com/p/Everbilt-3-in-Stainless-Steel-Corner-Brace-4-Pack-14549/203339961)|1|1|$13.93|$13.93|
 |[Everbilt Flat Head Phillips #8-32 x 3/4"](https://www.homedepot.com/p/8-32-x-3-4-in-Phillips-Flat-Head-Zinc-Plated-Machine-Screw-8-Pack-803761/204274667)|1|1|$1.38|$1.38|
 |[24 Sq. Ft Optional Flooring](https://a.co/d/i6eyGMt)|1|1|$22.00|$22.00|
+||||Total Cost|$440.91|
 
 
 ## Demo
