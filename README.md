@@ -6,8 +6,6 @@ Kesler Mathieu, Hung Tran, Ameera Zamani Iftekhar, Maggie Lau
 ## Type of Project
 Engineering - Graduate Level
 
-## Detailed Reference
-[Proposal Doc](https://docs.google.com/document/d/1DPl8a1aFSLdDcSO5HPQ68z0GHqil6a57udiRcfCY16c/edit)
 
 ## Summary
 The goal at hand is to create a rover that can be deployed in an unknown indoor environment, autonomously navigate while capturing video feed, and subsequently return to its starting position. The central technique known as SLAM will allow the rover to concurrently map and locate itself in a newfound floorspace. This will subsequently be paired with path planning algorithms so the vehicle can efficiently navigate such space while reducing collisions, henceforth achieving a level of autonomy sufficient enough for indoor exploration. 
@@ -22,23 +20,25 @@ Simultaneous Localization and Mapping or SLAM is concerned with the objective of
 From a mapping perspective, using LiDAR to establish a point cloud of all neighboring objects at a fixed distance sounds intuitive enough but that alone doesn’t touch on the topic of localization. Fortunately, LiDAR-Based SLAM can be interfaced with wheel odometry, which measures distance traveled at the wheel, along with accelerometers & gyroscope sensors to mathematically model its location based on initial starting conditions. With its environment mapped out, the final step to reach a level of autonomy has to deal with path planning. There are a number of path planning algorithms (e.g. Dijkstra, A* Search, & Rapidly Exploring Random Tree) that essentially try to solve the same task: to find the shortest path in the form of a continuous sequence of non-blocking points that leads to its goal destination while avoiding points along that path that are deemed or marked as obstacles. Taken in conjunction, we get an overview of how autonomous navigation can generally be achieved - perception through SLAM coupled with classical shortest path algorithms.
 
 ## GitHub Directory Description
-accelerometer/accelerometer.py: script to get accelerometer data  
-lidar/scan1.py: script to run a LiDAR scan  
-lidar/start1.py: script to connect to LiDAR   
-lidar/stop1.py: script to stop LiDAR  
-motor/main.py: script that moves the rover (forward, backwards, stop, etc)  
-path_planning/dijkstra_path_planner.py: implementation of dijkstra's algorithm  
-path_planning/grid_maps.py: file with test grid maps  
-path_planning/test_dijkstra_path_planner.py: script to test dijkstra's algorithm implementation  
-slam/lidar_data_01.csv: file of data from LiDAR scan  
-slam/map.py: script to create point cloud map  
-slam/OccupancyMap-2.ipynb: notebook to create occupany grid  
-slam/sampling_10.csv: data to create occupancy grid  
-motor_driver.py: script that controls motor driver for rover movement  
+```accelerometer/accelerometer.py```: script to get accelerometer data  
+```lidar/scan1.py```: script to run a LiDAR scan  
+```lidar/start1.py```: script to connect to LiDAR   
+```lidar/stop1.py```: script to stop LiDAR  
+```motor/main.py```: script that moves the rover (forward, backwards, stop, etc)  
+```path_planning/dijkstra_path_planner.py```: implementation of dijkstra's algorithm for shortest path creation  
+```path_planning/grid_maps.py```: file with grid maps to be loaded into path planner  
+```path_planning/test_dijkstra_path_planner.py```: unit test suite to test dijkstra's algorithm implementation upon different occupancy grid scenarios  
+```slam/lidar_data_01.csv:``` file of data from LiDAR scan  
+```slam/map.py```: script to create point cloud map  
+```slam/OccupancyMap-2.ipynb```: notebook to create occupany grid  
+```slam/sampling_10.csv```: data to create occupancy grid  
+```motor_driver.py```: main driver file - contains business logic that ties path planner to discrete rover movements (i.e. left, right, forward, backward) using VIAM SDK   
 
 
-## Minimum Viable Product Results (as of 04/22/2023)
-### Run Command to Drive Rover: `python motor_driver.py`
+## Video Sample
+[Drive From Starting Cell at (2,2) To Destination Cell = (4,2) with Subsequent Drive](https://drive.google.com/file/d/1mu77br_SzW_rBbKL5Mkbw_J7l3BvrA6m/view?usp=share_link)
+
+## Run Command to Drive Rover: `python motor_driver.py`
 ```
 pi@headlesspi:~/DGMD-S-17-Autonomous-Indoor-Rover-Final-Project $ python motor_driver.py
 Enter the goal point as x y: 0 4
@@ -70,15 +70,3 @@ moving straight
 driving to :(0, 4)
 moving straight
 closing client connection to Viam server...
-```
-### PathPlanner Results: `python3 path_planning/test_dijkstra_path_planner.py`
-
-```
-Kess-MBP:autonomous_rover_project keslermathieu$ python3 path_planning test_dijkstra_path_planner.py
-----------------------------------------------------------------------
-Ran 13 tests in 12.282s
-
-OK
-Kess-MBP:autonomous_rover_project keslermathieu$ 
-```
-
