@@ -96,7 +96,12 @@ closing client connection to Viam server...
 ## Results
 Collection of angle data has been taken in three trials [Trial 1,](https://drive.google.com/file/d/12OP1WOHqNpT-BLAILZ_RglF-sTq8oRL3/view?usp=drive_link)
 [Trial 2,](https://drive.google.com/file/d/1-yW1voN9yMVNddW7hGwMYWxfM7SlIpRM/view?usp=drive_link)
-[Trial 3](https://drive.google.com/file/d/1NJ_CmgMRExUB6kOqvkRU7NzaHHwmbWIJ/view?usp=drive_link) where an external, gyroscope was placed on top of the rover to record the orientation at each phase of movement. The mean absolute error (MAE) with regards to the rover's orientation per trial are: <em><strong>5.50, 4.00, 4.38</strong></em> respectively. These values are relatively close to 0 which demonstrates the angles for each line segmentation are relatively close to what's expected thereby illustrating favorable navigation when deployed into other static indoor spaces.
+[Trial 3](https://drive.google.com/file/d/1NJ_CmgMRExUB6kOqvkRU7NzaHHwmbWIJ/view?usp=drive_link) where an external, gyroscope was placed on top of the rover to record the orientation at each phase of movement.
+
+$$e_{i}=(expected\:angle_{i} - measured\:angle_{i})$$
+$$MAE =\frac{1}{n} \sum_{i=1}^{n}|e_{i}|$$
+
+ The mean absolute error (MAE) with regards to the rover's orientation per trial are: <em><strong>5.50, 4.00, 4.38</strong></em> respectively. These values are relatively close to 0 which demonstrates the angles for each line segmentation are relatively close to what's expected thereby illustrating favorable navigation when deployed into other static indoor spaces.
 <img src="media/result_table.png">
 <img src="media/result_graph.png">
 
