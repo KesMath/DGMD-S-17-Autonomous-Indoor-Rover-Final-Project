@@ -34,7 +34,7 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 
 
 ## Demo
-<a><img src="media/Sample_Drive_For_Video_Deliverable_AdobeExpress.gif" width="500" height="300"></a>
+<a><img src="media/Sample-Drive-For-Video-Deliverab.gif"></a>
 
 ## Run Command to Drive Rover: `python motor_driver.py`
 ```
