@@ -20,11 +20,9 @@ Simultaneous Localization and Mapping or SLAM is concerned with the objective of
 From a mapping perspective, using LiDAR to establish a point cloud of all neighboring objects at a fixed distance sounds intuitive enough but that alone doesn’t touch on the topic of localization. Fortunately, LiDAR-Based SLAM can be interfaced with wheel odometry, which measures distance traveled at the wheel, along with accelerometers & gyroscope sensors to mathematically model its location based on initial starting conditions. With its environment mapped out, the final step to reach a level of autonomy has to deal with path planning. There are a number of path planning algorithms (e.g. Dijkstra, A* Search, & Rapidly Exploring Random Tree) that essentially try to solve the same task: to find the shortest path in the form of a continuous sequence of non-blocking points that leads to its goal destination while avoiding points along that path that are deemed or marked as obstacles. Taken in conjunction, we get an overview of how autonomous navigation can generally be achieved - perception through SLAM coupled with classical shortest path algorithms.
 
 ## GitHub Directory Description
-```accelerometer/accelerometer.py```: script to get accelerometer data  
 ```lidar/scan1.py```: script to run a LiDAR scan  
 ```lidar/start1.py```: script to connect to LiDAR   
 ```lidar/stop1.py```: script to stop LiDAR  
-```motor/main.py```: script that moves the rover (forward, backwards, stop, etc)  
 ```path_planning/dijkstra_path_planner.py```: implementation of dijkstra's algorithm for shortest path creation  
 ```path_planning/grid_maps.py```: file with grid maps to be loaded into path planner  
 ```path_planning/test_dijkstra_path_planner.py```: unit test suite to test dijkstra's algorithm implementation upon different occupancy grid scenarios  
@@ -32,7 +30,7 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 ```slam/map.py```: script to create point cloud map  
 ```slam/OccupancyMap-2.ipynb```: notebook to create occupany grid  
 ```slam/sampling_10.csv```: data to create occupancy grid  
-```motor_driver.py```: main driver file - contains business logic that ties path planner to discrete rover movements (i.e. left, right, forward, backward) using VIAM SDK   
+```motor_driver.py```: entry point file - contains business logic that ties path planner to discrete rover movements (i.e. left, right, forward, backward) using VIAM SDK   
 
 
 ## Video Sample
