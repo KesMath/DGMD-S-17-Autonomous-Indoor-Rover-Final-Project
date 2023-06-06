@@ -32,6 +32,13 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 ```slam/sampling_10.csv```: data to create occupancy grid  
 ```motor_driver.py```: entry point file - contains business logic that ties path planner to discrete rover movements (i.e. left, right, forward, backward) using VIAM SDK   
 
+## Bill of Materials
+
+|   |   |   |   |   |
+|---|---|---|---|---|
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
 
 ## Demo
 <img src="media/Sample_Drive_For_Video_Deliverable.gif" width="500" height="300">
