@@ -4,7 +4,7 @@
 Kesler Mathieu, Hung Tran, Ameera Zamani Iftekhar, Maggie Lau
 
 ## Type of Project
-Engineering - Graduate Level
+Engineering - Graduate Level <br>
 Full Report [here](Autonomous_Indoor_Rover_Report.pdf)
 
 ## Summary
