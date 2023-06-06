@@ -97,5 +97,9 @@ closing client connection to Viam server...
 <img src="media/result_table.png">
 <img src="media/result_graph.png">
 
+Collection of angle data has been taken in three trials [Trial 1,](https://drive.google.com/file/d/12OP1WOHqNpT-BLAILZ_RglF-sTq8oRL3/view?usp=drive_link)
+[Trial 2,](https://drive.google.com/file/d/1-yW1voN9yMVNddW7hGwMYWxfM7SlIpRM/view?usp=drive_link)
+[Trial 3](https://drive.google.com/file/d/1NJ_CmgMRExUB6kOqvkRU7NzaHHwmbWIJ/view?usp=drive_link) where an external, gyroscope was placed on top of the rover to record the orientation at each phase of movement. The mean absolute error (MAE) with regards to the rover's orientation per trial are: \textbf{5.50, 4.00, 4.38} respectively. These values are relatively close to 0 which demonstrates the angles for each line segmentation are relatively close to what's expected thereby illustrating favorable navigation when deployed into other static indoor spaces.
+
 ## Conclusion
 This report highlights the rover's navigation performance in static indoor spaces. The trials of the rover's orientation resulted in mean absolute error (MAE) values of 5.50, 4.00, and 4.38, respectively, which are remarkably close to 0. This close proximity to the expected angles demonstrates the rover's favorable navigation capabilities when deployed in static indoor spaces. To further improve its capabilities, integration with a reliable SLAM package, inclusion of a gyroscope for accurate orientation, and transitioning to a more efficient shortest path algorithm are recommended. These enhancements will contribute to increased navigation accuracy, dynamic occupancy grid generation, and extended battery life, enabling the rover's successful deployment in larger environments.
