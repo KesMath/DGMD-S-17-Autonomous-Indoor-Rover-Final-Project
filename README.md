@@ -94,8 +94,8 @@ closing client connection to Viam server...
 ```
 
 ## Results
-<img src="media/result_table.jpg">
-<img src="media/result_graph.jpg">
+<img src="media/result_table.png">
+<img src="media/result_graph.png">
 
 ## Conclusion
 This report highlights the rover's navigation performance in static indoor spaces. The trials of the rover's orientation resulted in mean absolute error (MAE) values of 5.50, 4.00, and 4.38, respectively, which are remarkably close to 0. This close proximity to the expected angles demonstrates the rover's favorable navigation capabilities when deployed in static indoor spaces. To further improve its capabilities, integration with a reliable SLAM package, inclusion of a gyroscope for accurate orientation, and transitioning to a more efficient shortest path algorithm are recommended. These enhancements will contribute to increased navigation accuracy, dynamic occupancy grid generation, and extended battery life, enabling the rover's successful deployment in larger environments.
