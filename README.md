@@ -36,7 +36,7 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 
 | Description  | Qty  | Units  | Unit Cost  | Cost |
 |--------------|------|------|--------|------------|
-|[Viam Chassis Rover (comes pre-assembled)](https://www.viam.com/resources/rover)|      |      |        |            |      |
+|[Viam Chassis Rover (comes pre-assembled)](https://www.viam.com/resources/rover)|  1    |    1  |        |            | $99.00     |
 |              |      |      |        |            |
 |              |      |      |        |            |
 |              |      |      |        |            |
