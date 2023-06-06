@@ -39,9 +39,11 @@ From a mapping perspective, using LiDAR to establish a point cloud of all neighb
 |[Viam Chassis Rover (comes pre-assembled)](https://www.viam.com/resources/rover)|1|1|$99.00|$99.00|
 |[SlamTec RPI LIDAR Sensor](https://a.co/d/fh0p7Po) |1|1|$99.00|$99.00|
 |[Raspberry Pi 4 Model B 2019 Quad Core 64 Bit WiFi Bluetooth (4GB)](https://a.co/d/5zOuki6)|1|1|$90.00|$90.00|
-|              |      |      |        |            |
-|              |      |      |        |            |
-|              |      |      |        |            |
+|[6pcs 1￵8￵6￵50 Rechargeable Batter￵y 5000mAh W￵i￵th 18650 Battery Charger](https://a.co/d/fuPCwF9)|1|1|$26.99|$26.99|
+|[MicroSD Card with Adapter 128GB](https://a.co/d/aGMFaf9)|1|1|$15.02|$15.02|
+|[Spare Set of 6pcs 1￵8￵6￵50 Rechargeable Batter￵y 5000mAh](https://a.co/d/hp6hN2T)|1|1|$17.99|$17.99|
+|[3D Print LiDAR Adapter](autonomous_rover_project/RPIidar_adapter.STL)(https://makelab.com)|1|1|$34.62|$34.62|
+
 
 ## Demo
 <img src="media/Sample_Drive_For_Video_Deliverable.gif" width="500" height="300">
