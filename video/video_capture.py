@@ -11,7 +11,7 @@ class VideoCapture():
         self.outfile = None
 
     def capture_video(self):
-        self.cap = cv.VideoCapture(cv2.CAP_V4L2) #cv2.CAP_V4L2
+        self.cap = cv.VideoCapture(cv.CAP_V4L2) #cv2.CAP_V4L2
 
         # Define the codec and create VideoWriter object
         fourcc = cv.VideoWriter_fourcc(*'XVID')
