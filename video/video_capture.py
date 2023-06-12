@@ -1,12 +1,17 @@
 import cv2 as cv
 
+# https://docs.opencv.org/3.4/d4/d15/group__videoio__flags__base.html
+# https://docs.opencv.org/4.x/de/db1/group__videoio__registry.html
+# https://github.com/opencv/opencv/issues/19527
+
+
 class VideoCapture():
     def __init__(self):
         self.cap = None
         self.outfile = None
 
     def capture_video(self):
-        self.cap = cv.VideoCapture(4) # corresponds to /dev/video4 character device file
+        self.cap = cv.VideoCapture(0) #cv2.CAP_V4L2
 
         # Define the codec and create VideoWriter object
         fourcc = cv.VideoWriter_fourcc(*'XVID')
