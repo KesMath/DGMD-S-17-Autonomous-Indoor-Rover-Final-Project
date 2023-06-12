@@ -47,7 +47,7 @@ import cv2 as cv
 
 
 def capture_video():
-    cap = cv.VideoCapture(cv.CAP_V4L2) #cv2.CAP_V4L2
+    cap = cv.VideoCapture(0) #cv.CAP_V4L2
 
     # Define the codec and create VideoWriter object
     fourcc = cv.VideoWriter_fourcc(*'XVID')
