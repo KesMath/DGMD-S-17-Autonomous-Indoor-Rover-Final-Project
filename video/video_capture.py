@@ -5,7 +5,7 @@ class VideoCapture():
         self.cap = None
         self.outfile = None
 
-    def capture_video():
+    def capture_video(self):
         self.cap = cv.VideoCapture(0)
 
         # Define the codec and create VideoWriter object
@@ -25,7 +25,7 @@ class VideoCapture():
             if cv.waitKey(1) == ord('q'):
                 break
 
-    def free_video_resources():      
+    def free_video_resources(self):      
         # Release everything if job is finished
         self.cap.release()
         self.outfile.release()
