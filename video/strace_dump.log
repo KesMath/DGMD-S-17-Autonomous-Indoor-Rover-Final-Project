@@ -1,0 +1,58 @@
+strace cat usb-GENERAL_GENERAL_WEBCAM-video-index0
+execve("/usr/bin/cat", ["cat", "usb-GENERAL_GENERAL_WEBCAM-video"...], 0x7fe680bf38 /* 25 vars */) = 0
+brk(NULL)                               = 0x55945ac000
+faccessat(AT_FDCWD, "/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=33345, ...}) = 0
+mmap(NULL, 33345, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fa3b3d000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/aarch64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0`\17\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1455120, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fa3b3b000
+mmap(NULL, 1527752, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fa39a3000
+mprotect(0x7fa3b00000, 61440, PROT_NONE) = 0
+mmap(0x7fa3b0f000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x15c000) = 0x7fa3b0f000
+mmap(0x7fa3b15000, 12232, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fa3b15000
+close(3)                                = 0
+mprotect(0x7fa3b0f000, 16384, PROT_READ) = 0
+mprotect(0x5582ad8000, 4096, PROT_READ) = 0
+mprotect(0x7fa3b49000, 4096, PROT_READ) = 0
+munmap(0x7fa3b3d000, 33345)             = 0
+brk(NULL)                               = 0x55945ac000
+brk(0x55945cd000)                       = 0x55945cd000
+openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=3041504, ...}) = 0
+mmap(NULL, 3041504, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fa36bc000
+close(3)                                = 0
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0), ...}) = 0
+openat(AT_FDCWD, "usb-GENERAL_GENERAL_WEBCAM-video-index0", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFCHR|0660, st_rdev=makedev(0x51, 0xe), ...}) = 0
+fadvise64(3, 0, 0, POSIX_FADV_SEQUENTIAL) = 0
+mmap(NULL, 139264, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fa369a000
+read(3, 0x7fa369b000, 131072)           = -1 EINVAL (Invalid argument)
+write(2, "cat: ", 5cat: )                    = 5
+write(2, "usb-GENERAL_GENERAL_WEBCAM-video"..., 39usb-GENERAL_GENERAL_WEBCAM-video-index0) = 39
+openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0
+read(4, "# Locale name alias data base.\n#"..., 4096) = 2996
+read(4, "", 4096)                       = 0
+close(4)                                = 0
+openat(AT_FDCWD, "/usr/share/locale/en_GB.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale/en_GB.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale/en_GB/LC_MESSAGES/libc.mo", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=1433, ...}) = 0
+mmap(NULL, 1433, PROT_READ, MAP_PRIVATE, 4, 0) = 0x7fa3b45000
+close(4)                                = 0
+openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+write(2, ": Invalid argument", 18: Invalid argument)      = 18
+write(2, "\n", 1
+)                       = 1
+munmap(0x7fa369a000, 139264)            = 0
+close(3)                                = 0
+close(1)                                = 0
+close(2)                                = 0
+exit_group(1)                           = ?
++++ exited with 1 +++
