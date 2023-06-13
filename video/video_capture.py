@@ -15,8 +15,7 @@ def capture_video():
     outfile = cv.VideoWriter('output.avi', fourcc, 20.0, (640,  480))
 
     print("about to iterate through capture device...")
-    while True:
-        print("capture is open...")
+    while cap.isOpened():
         ret, frame = cap.read()
         if not ret:
             print("Can't receive frame (stream end?). Exiting ...")
