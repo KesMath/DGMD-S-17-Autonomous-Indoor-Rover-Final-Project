@@ -9,6 +9,7 @@ def capture_video():
     outfile = cv.VideoWriter('output.mp4', fourcc, 20.0, (640,  480))
 
     while cap.isOpened():
+        print("capture is open...")
         ret, frame = cap.read()
         if not ret:
             print("Can't receive frame (stream end?). Exiting ...")
@@ -20,6 +21,7 @@ def capture_video():
         if cv.waitKey(1) == ord('q'):
             break
     
+    print("releasing resources...")
     cap.release()
     outfile.release()
     cv.destroyAllWindows()
