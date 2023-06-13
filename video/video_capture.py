@@ -3,7 +3,7 @@ import cv2 as cv
 
 def capture_video():
     print("instantiating resources...")
-    cap = cv.VideoCapture("/dev/v4l/by-id/usb-GENERAL_GENERAL_WEBCAM-video-index0", cv.CAP_V4L2)
+    cap = cv.VideoCapture("/dev/v4l/by-id/usb-GENERAL_GENERAL_WEBCAM-video-index0")
 
     # Define the codec and create VideoWriter object
     fourcc = cv.VideoWriter_fourcc(*'XVID')
