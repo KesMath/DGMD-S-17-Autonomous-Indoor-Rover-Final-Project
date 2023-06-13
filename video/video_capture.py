@@ -1,6 +1,7 @@
 import cv2 as cv
 
 def capture_video():
+    print("instantiating resources...")
     cap = cv.VideoCapture(0)
 
     # Define the codec and create VideoWriter object
@@ -8,6 +9,7 @@ def capture_video():
 
     outfile = cv.VideoWriter('output.mp4', fourcc, 20.0, (640,  480))
 
+    print("about to iterate through capture device...")
     while cap.isOpened():
         print("capture is open...")
         ret, frame = cap.read()
