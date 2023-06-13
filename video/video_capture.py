@@ -6,9 +6,9 @@ def capture_video():
     cap = cv.VideoCapture("/dev/v4l/by-id/usb-GENERAL_GENERAL_WEBCAM-video-index0")
 
     # Define the codec and create VideoWriter object
-    fourcc = cv.VideoWriter_fourcc(*'XVID')
+    fourcc = cv.VideoWriter_fourcc(*'MJPG')
 
-    outfile = cv.VideoWriter('output.avi', fourcc, 20.0, (640,  480))
+    outfile = cv.VideoWriter('output.mp4', fourcc, 20.0, (640,  480))
 
     print("about to iterate through capture device...")
     while cap.isOpened():
