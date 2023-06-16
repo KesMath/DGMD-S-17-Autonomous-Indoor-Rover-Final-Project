@@ -1,5 +1,7 @@
 import cv2 as cv
 
+# https://docs.opencv.org/4.x/dd/d43/tutorial_py_video_display.html
+
 class VideoCapture():
     def __init__(self):
         self.cap = None
@@ -12,23 +14,23 @@ class VideoCapture():
         fourcc = cv.VideoWriter_fourcc(*'XVID')
 
         self.outfile = cv.VideoWriter('output.avi', fourcc, 20.0, (640,  480))
-
+    
         while self.cap.isOpened():
             ret, frame = self.cap.read()
             if not ret:
                 print("Can't receive frame (stream end?). Exiting ...")
                 break
-            self.outfile.write(frame)
-            cv.imshow('frame', frame)
-            if cv.waitKey(1) == ord('q'):
+            gray_frame = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+            self.outfile.write(gray_frame)
+            cv.imshow('frame', gray_frame)
+            if cv.waitKey(1) & 0xFF == ord('q'): # terminate when 'q' key pressed
                 self.free_video_resources()
                 break
 
     def free_video_resources(self):      
-        # Release everything when job is finished
         print("releasing resources...")
-        self.cap.release()
-        self.outfile.release()
+        self.cap.release() # close camera
+        self.outfile.release() # close output file
         cv.destroyAllWindows()
 
 def main():
